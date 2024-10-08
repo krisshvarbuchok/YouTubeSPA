@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+}
+.favorite:hover{
+    color: crimson;
+}
+.active{
+    color: deeppink;
+}

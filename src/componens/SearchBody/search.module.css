@@ -1,0 +1,22 @@
+.withoutRequest{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    display: flex;
+    flex-direction: column; /* Выстраивает элементы вертикально */
+    align-items: center; /* Выравнивание по центру по горизонтали */
+    justify-content: flex-start; /* Элементы будут появляться один за другим сверху */
+    padding: 20px; /* Отступы вокруг контейнера */
+    margin-bottom: 20px;
+    width: 100%;
+    gap: 20px;
+}
+
+/*.container > * {
+    margin-bottom: 20px; /* Отступ между элементами (SearchComponent и SearchResult) */
+   /* width: 100%; /* Элементы займут всю доступную ширину */
+/*}*/

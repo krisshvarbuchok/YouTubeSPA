@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    width: 50vh;
+    margin: 10vh auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: #ffffff;
+    border: 0.5px gray;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+}
+.label{
+    font-size: 12px;
+    color: #cdcdcd;
+    
+}
+.login{
+    font-size: 14px;
+    font-weight: bold;
+}
+.buttonLogIn{
+    display: block;
+    margin: 20px auto;
+}

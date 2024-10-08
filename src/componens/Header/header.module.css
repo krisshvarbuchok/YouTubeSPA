@@ -1,0 +1,10 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 150px;
+    height: 40px;
+    background-color: aliceblue;
+}
+.container{
+    display: flex;
+}
