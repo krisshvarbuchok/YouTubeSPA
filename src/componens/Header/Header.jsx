@@ -1,6 +1,6 @@
-import Favorites from "./Favorites/Favorites"
+import FavoritesHeader from "./Favorites/FavoritesHeader"
 import LogOut from "./LogOut/LogOut"
-import Search from "./SearchHeader/SearchHeader"
+import SearchHeader from "./SearchHeader/SearchHeader"
 import styles from './header.module.css'
 
 const Header = () => {
@@ -8,8 +8,9 @@ const Header = () => {
     return (
         <div className={styles.header}>
             <div className={styles.container}>
-                <Search />
-                <Favorites />
+                <img src="sibdev-logo.svg" alt="Logo" className={styles.logo} />
+                <SearchHeader />
+                <FavoritesHeader />
             </div>
             <LogOut />
         </div>

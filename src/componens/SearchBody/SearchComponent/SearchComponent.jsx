@@ -16,7 +16,7 @@ const SearchComponent = () => {
     const { status, error } = useSelector(state => state.list);
     const [favorite, setFavorite] = useState(false)
 
-    useEffect(()=>{
+    useEffect(() => {
         ref.current.focus()
     }, [])
 
@@ -34,7 +34,7 @@ const SearchComponent = () => {
         //console.log(request);
         dispatch(writeRequest(e.target.value))
     }
-    const handleFavorite = () =>{
+    const handleFavorite = () => {
         console.log('ok');
         setFavorite(!favorite);
     }
@@ -47,13 +47,17 @@ const SearchComponent = () => {
     }
 
     return (
-        <div className={styles.container}>
-            <Input placeholder="Что будем смотреть?" ref={ref} value={request} 
-                onChange={(e) => handleChange(e)} onKeyDown={(e) => handleKeyDown(e)} suffix={<HeartOutlined className={`${styles.favorite} ${favorite ? styles.active : ''}`} onClick={()=>handleFavorite()}/>} />
-            
-            <Button onClick={() => handleClick()}>Поиск</Button>
-           
-        </div>
+        <>
+            <div>Поиск видео</div>
+            <div className={styles.container}>
+                <Input placeholder="Что будем смотреть?" ref={ref} value={request}
+                    onChange={(e) => handleChange(e)} onKeyDown={(e) => handleKeyDown(e)} suffix={<HeartOutlined className={`${styles.favorite} ${favorite ? styles.active : ''}`} onClick={() => handleFavorite()} />} />
+
+                <Button onClick={() => handleClick()}>Поиск</Button>
+
+            </div>
+        </>
+
     )
 }
 export default SearchComponent;

@@ -1,0 +1,9 @@
+.buttonLogOut{
+    border: none;
+    background-color: #FFFFFF;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: #1390E5;
+}
+.buttonLogOut:hover{
+    color: #19689d;
+}

@@ -1,0 +1,15 @@
+.buttonFavorites{
+    border: none;
+    background-color: #FFFFFF;
+    border-bottom: 2px solid transparent;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+.buttonFavorites:hover{
+    color: #1390E5;
+}
+.active{
+    border: none;
+    border-bottom: 2px solid #1390E5;
+    background-color: #FFFFFF;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
