@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import Header from "./Header/Header";
-import SearchBody from "./SearchBody/SearchBody";
+import Header from "../Header/Header";
+import SearchBody from "../SearchBody/SearchBody";
 import { useEffect } from "react";
-import FavoritesComponent from "./FavoritesComponent/FavoritesComponent";
+import FavoritesComponent from "../FavoritesComponent/FavoritesComponent";
+import styles from './mainPage.module.css';
 
-const Succesed = () =>{
+const MainPage = () =>{
     const dispatch = useDispatch();
     const isActive = useSelector(state => state.isActive);
     const {status, error} = useSelector(state => state.list);
@@ -17,12 +18,12 @@ const Succesed = () =>{
 
     
     return (
-        <>
+        <div >
             <Header />
            {isActive === 'search' && <SearchBody />} 
             {isActive === 'favorite' && <FavoritesComponent />}
-        </>
+        </div>
     )
 }
 
-export default Succesed;
+export default MainPage;

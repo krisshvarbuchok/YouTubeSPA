@@ -1,6 +1,7 @@
 .buttonLogOut{
     border: none;
     background-color: #FFFFFF;
+    font-size: 18px;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     color: #1390E5;
 }

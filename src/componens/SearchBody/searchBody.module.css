@@ -1,22 +1,28 @@
+.containerBig{
+    width: 1040px;
+    margin: auto;
+}
 .withoutRequest{
     display: flex;
-
     justify-content: center;
+    flex-direction: column;
+    align-content: center;
     align-items: center;
-    height: 75vh;
+    margin-top: 200px;
+    gap: 40px;
 }
+
 .container {
     display: flex;
-    flex-direction: column; /* Выстраивает элементы вертикально */
-    align-items: center; /* Выравнивание по центру по горизонтали */
-    justify-content: flex-start; /* Элементы будут появляться один за другим сверху */
-    padding: 20px; /* Отступы вокруг контейнера */
-    margin-bottom: 20px;
-    width: 100%;
-    gap: 20px;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 /*.container > * {
     margin-bottom: 20px; /* Отступ между элементами (SearchComponent и SearchResult) */
    /* width: 100%; /* Элементы займут всю доступную ширину */
 /*}*/
+
+.searchVideo{
+    font-size: 36px;
+}

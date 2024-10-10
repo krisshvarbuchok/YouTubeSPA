@@ -4,10 +4,17 @@
 .favorite:hover{
     color: crimson;
 }
+.favorite:disabled{
+    color: rgb(191, 191, 191);
+}
+
 .active{
     color: deeppink;
 }
-/* .inputStyle{
+.inputStyle{
     width: 686px;
     height: 52px;
-} */
+}
+.buttonSearch{
+    width: 150px;
+}
