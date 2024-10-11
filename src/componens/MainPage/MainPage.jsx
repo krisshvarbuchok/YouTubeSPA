@@ -9,9 +9,9 @@ const MainPage = () =>{
     const dispatch = useDispatch();
     const isActive = useSelector(state => state.isActive);
     const {status, error} = useSelector(state => state.list);
-    if(status === 'loading'){
-        return <div>...loading</div>
-    }
+    // if(status === 'loading'){
+    //     return <div>...loading</div>
+    // }
     if( status === 'failed') {
         return <div>УПС... что-то пошло не так: {error.message}</div>
     }

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 const SearchResult = () => {
     const dispatch = useDispatch();
     const { data } = useSelector(state => state.list);
+    const { status, error } = useSelector(state => state.list);
     const { stats } = useSelector(state => state.list)
     console.log('stats' , stats);
  
@@ -17,6 +18,12 @@ const SearchResult = () => {
         });
     }, [data, dispatch]);
 
+    if (status === 'loading') {
+        return <div className={styles.error}>...loading</div>
+    }
+    if (status === 'failed') {
+        return <div className={styles.error}>УПС... что-то пошло не так: {error.message}</div>
+    }
     return (
         <>
             <List grid={{

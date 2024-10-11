@@ -9,6 +9,7 @@ import { Button, ConfigProvider, Input } from 'antd';
 const SignIn = () => {
     const navigate = useNavigate();
     const { control, register, handleSubmit, formState: { errors } } = useForm();
+    const { status, error } = useSelector(state => state.list);
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -25,6 +26,12 @@ const SignIn = () => {
             .catch((error) => {
                 console.error('Ошибка авторизации:', error);
             });
+    }
+    if (status === 'loading') {
+        return <div>...loading</div>
+    }
+    if (status === 'failed') {
+        return <div>УПС... что-то пошло не так: {error.message}</div>
     }
 
     return (

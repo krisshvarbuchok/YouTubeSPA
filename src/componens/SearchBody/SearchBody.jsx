@@ -16,7 +16,6 @@ const SearchBody = () => {
 
             </div>
 
-
             {data.length !== 0 && <SearchResult />}
 
         </div>
