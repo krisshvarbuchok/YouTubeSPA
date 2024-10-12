@@ -8,9 +8,13 @@ const SearchResult = () => {
     const dispatch = useDispatch();
     const { data } = useSelector(state => state.list);
     const { status, error } = useSelector(state => state.list);
-    const { stats } = useSelector(state => state.list)
-    console.log('stats' , stats);
- 
+    const { stats } = useSelector(state => state.list);
+    const request = useSelector(state => state.request);
+    //console.log('stats' , stats);
+    const favorite = useSelector(state => state.favorite);
+    const countFavorite = favorite.find(item => item.request === request)?.count;
+    const number = countFavorite ? countFavorite : 12;
+    
 
     useEffect(() => {
         data.forEach(video => {
@@ -25,46 +29,25 @@ const SearchResult = () => {
         return <div className={styles.error}>УПС... что-то пошло не так: {error.message}</div>
     }
     return (
-        <>
-            <List grid={{
-                gutter: 16,
-                xs: 1,
-                sm: 2,
-                md: 4,
-                lg: 4,
-                xl: 4,
-                xxl: 4,
-            }}
-                dataSource={data}
-                renderItem={(item) => (
-                    <List.Item>
-                        <Card title={item.snippet.title}>
-                            <img
+        <div >
+            <ul className={styles.grid}>
+                {data.slice(0, number).map(item =>{
+                    return <li key={item.id.videoId || item.id.playlistId} className={styles.item}>
+                        <img
                                 src={item.snippet.thumbnails.high.url}
                                 alt={item.snippet.title}
                                 width="180" height="130"
                             />
-                            {/* <iframe width="180" height="130"  src={`https://www.youtube.com/embed/${item.id.videoId}`}
-                        title={item.snippet.title} frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    /> */}
-                        </Card>
-                        <p>{item.snippet.channelTitle}</p>
-                        {/* Показываем статистику, если она уже загружена */}
-                        {stats[item.id.videoId] && (
+                            <p>{item.snippet.title}</p>
+                            <p>{item.snippet.channelTitle}</p>
+                            {stats[item.id.videoId] && (
                     <p>Просмотры: {stats[item.id.videoId].viewCount}</p>
                 )}
-                    </List.Item>
-                )}
-            />
-            {/* <div className={styles.container}>
-                {data?.map(item => (
-                    <li key={item.id.videoId || item.id.playlistId}> {item.snippet.title}</li>
-                ))
-                }
-            </div> */}
-        </>
+                    </li>
+                })}
+            </ul>
+          
+        </div>
     )
 }
 export default SearchResult;

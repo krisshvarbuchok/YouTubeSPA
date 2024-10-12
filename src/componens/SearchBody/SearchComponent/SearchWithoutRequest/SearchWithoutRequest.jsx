@@ -21,9 +21,9 @@ const SearchWithoutRequest = forwardRef(({ handleChange, handleKeyDown, handleFa
                         },
                         Button: {
                             colorPrimary: '#1390E5', // Основной цвет кнопки
-                                colorPrimaryHover: '#0d76c1', // Цвет при наведении
-                                controlHeight: 52, // Высота кнопки
-                                fontSize: 20, // Размер шрифта
+                            colorPrimaryHover: '#0d76c1', // Цвет при наведении
+                            controlHeight: 52, // Высота кнопки
+                            fontSize: 20, // Размер шрифта
                         }
                     }
 
@@ -34,7 +34,7 @@ const SearchWithoutRequest = forwardRef(({ handleChange, handleKeyDown, handleFa
                     onChange={(e) => handleChange(e)} onKeyDown={(e) => handleKeyDown(e)} suffix={<HeartOutlined className={`${request.trim() === '' ? styles.disabled : styles.favorite} ${isFavoriteHelper(favorite, request) ? styles.active : ''}`} onClick={() => handleFavorite()} />} />
                 <Button type="primary" className={styles.buttonSearch} onClick={() => handleClick()}>Поиск</Button>
             </ConfigProvider>
-                {/* {warning === 'Запрос сохранен, если вы хотите изменить или удалить его, перейдите в раздел "Избранное"' && <WarningComponent />} */}
+            {/* {warning === 'Запрос сохранен, если вы хотите изменить или удалить его, перейдите в раздел "Избранное"' && <WarningComponent />} */}
 
         </>
     )

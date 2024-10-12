@@ -25,6 +25,9 @@ const SearchComponent = () => {
     const navigate = useNavigate();
     const warning = useSelector(state => state.warning);
     const modal = useSelector(state => state.modal);
+    const number = useSelector( state => state.number);
+    console.log('numbers', number);
+    
 
     useEffect(() => {
         ref.current.focus()
@@ -32,8 +35,11 @@ const SearchComponent = () => {
 
     const handleClick = () => {
         console.log('выполнить поиск видео', request);
-        if (request.trim() !== '') dispatch(fetchGetVideos(request))
-
+        if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
+            dispatch(fetchGetVideos(favorite.find(item => item.request === request)?.name, number))
+        } else if(request.trim() !== '' && !isFavoriteHelper(favorite, request)){
+            dispatch(fetchGetVideos(request, number))
+        }
     }
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -44,14 +50,12 @@ const SearchComponent = () => {
         dispatch(writeRequest(e.target.value))
     }
     const handleFavorite = () => {
-        console.log('ok');
-        console.log(favorite);
-        console.log(request);
+        //console.log('ok');
+        //console.log(favorite);
+        //console.log(request);
         if (isFavoriteHelper(favorite, request)) {
             dispatch(getWarning('Запрос сохранен, если вы хотите изменить или удалить его, перейдите в раздел "Избранное"'))
-            console.log(isFavoriteHelper(favorite, request));
-            
-            
+            //console.log(isFavoriteHelper(favorite, request));            
         } else if (request.trim() !== '') dispatch(isModalOpen(true));
     }
     useEffect(()=>{

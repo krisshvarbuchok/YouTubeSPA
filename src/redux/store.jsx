@@ -5,6 +5,8 @@ import isActiveButtonSlice from "./listSlice/isActiveButtonSlice";
 import favoriteSlice from "./listSlice/favoriteSlice";
 import warningSlice from "./listSlice/warningSlice";
 import ModalSlice from "./listSlice/ModalSlice";
+import changeNameInModalSlice from "./listSlice/changeNameInModalSlice";
+import gridNumberSlice from './listSlice/gridNumberSlice';
 
 const store = configureStore({
     reducer: {
@@ -14,6 +16,8 @@ const store = configureStore({
         favorite: favoriteSlice,
         warning: warningSlice,
         modal: ModalSlice,
+        name: changeNameInModalSlice,
+        number: gridNumberSlice,
     }
 })
 

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 
 const SearchBody = () => {
     const { data } = useSelector(state => state.list);
-    console.log('до листа', data);
+    //console.log('до листа', data);
 
     return (
         <div className={styles.containerBig}>

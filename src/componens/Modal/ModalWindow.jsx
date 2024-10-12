@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Input, Modal, Col, InputNumber, Row, Slider, Space, Cascader, ConfigProvider } from 'antd';
 import styles from './modalWindow.module.css';
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,10 @@ import { isModalOpen } from '../../redux/listSlice/ModalSlice';
 import SliderComponent from './ModalElements/SliderComponent';
 import SelectComponent from './ModalElements/SelectComponent';
 import isFavoriteHelper from '../../helper/isFavoriteHelper';
-
+import { changeName } from '../../redux/listSlice/changeNameInModalSlice';
+import { changeNumber } from '../../redux/listSlice/gridNumberSlice';
+import { getWarning } from '../../redux/listSlice/warningSlice';
+import WarningComponent from '../Warning/WarningComponent';
 
 const ModalWindow = () => {
     const request = useSelector(state => state.request);
@@ -16,28 +19,35 @@ const ModalWindow = () => {
     const navigate = useNavigate();
     const favorite = useSelector(state => state.favorite);
     const modal = useSelector(state => state.modal);
-    const [changeName, setChangeName] = useState('');
+    //const [changeName, setChangeName] = useState('');
+    const name = useSelector(state => state.name);
+    const number = useSelector( state => state.number);
+    const warning = useSelector(state => state.warning);
 
 
 
 
     const handleClick = () => {
-        if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) {
-            dispatch(addFavorite({ request: request, name: changeName, id: crypto.randomUUID(), select: 'withoutSelect', count: 25 }));
+        if(name === ''){
+            dispatch(getWarning('Заполните поле "Название"'))
+        } else if(request.trim() !== '' && !isFavoriteHelper(favorite, request) && name !== '') {
+            console.log({ request: request, name: name, id: crypto.randomUUID(), select: 'withoutSelect', count: number });
+            
+            dispatch(addFavorite({ request: request, name: name, id: crypto.randomUUID(), select: 'withoutSelect', count: number }));
             dispatch(isModalOpen(false));
             //navigate('/search')
+            dispatch(changeName(''));
+            dispatch(changeNumber(12))
         }
     }
 
     const handleCancel = () => {
         dispatch(isModalOpen(false));
     };
-    const handleChange = (e) => {
-        if (e.target.value.trim() !== '') {
-            setChangeName(e.target.value)
-        }
-    }
-
+   
+    useEffect(()=>{
+        dispatch(getWarning(''))
+    }, [name])
 
 
     return (
@@ -49,10 +59,12 @@ const ModalWindow = () => {
                     <Input value={request} disabled required />
                 </div>
                 <div>Название
-                    <Input placeholder='Укажите название' value={changeName} onChange={(e) => handleChange(e)} />
+                    <Input placeholder='Укажите название' value={name} onChange={(e) => dispatch(changeName(e.target.value))} />
                 </div>
+                
                 <SelectComponent />
                 <SliderComponent />
+                {warning === 'Заполните поле "Название"' && <WarningComponent/>}
             </Modal>
         </>
     )

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { get } from "react-hook-form";
 
 const config = {
     headers: {
@@ -38,6 +37,7 @@ const fetchAuthorization= createAsyncThunk('list/fetchAuthorization' , async(obj
 // }
 const getVideos = async (request) => {
     // console.log(localStorage.getItem('token'));
+    
      
      const response = await axios.get ('https://www.googleapis.com/youtube/v3/search', {
         params:{
@@ -45,7 +45,7 @@ const getVideos = async (request) => {
                 
                 key: import.meta.env.VITE_API_KEY,
                 q: request,      // запрос поиска
-                maxResults: 12   // максимальное количество видео
+                maxResults: 50   // максимальное количество видео
         }
     });
      console.log(response.data.items);
@@ -54,6 +54,8 @@ const getVideos = async (request) => {
  //getVideos()
 
  const fetchGetVideos = createAsyncThunk('video/fetchGetVideos', async(request) =>{
+    console.log('fetch request', request);
+    
     const data = await getVideos(request)
     return data
  })
@@ -73,7 +75,7 @@ const getVideos = async (request) => {
 
  const fetchGetMoreInfoAboutVideo = createAsyncThunk('video/fetchGetMoreInfoAboutVideo', async(videoId) =>{
     const response = await getMoreInfoAboutVideo(videoId);
-    console.log('more',{ videoId, stats: response.data.items[0].statistics });
+    //console.log('more',{ videoId, stats: response.data.items[0].statistics });
     
     return { videoId, stats: response.data.items[0].statistics };
  })
