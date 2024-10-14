@@ -8,6 +8,7 @@ const SliderComponent = () =>{
     //const [inputValue, setInputValue] = useState(1);
     const dispatch = useDispatch();
     const number = useSelector(state => state.number);
+    const edit = useSelector(state => state.edit);
     
     const onChange = (newValue) => {
         console.log('newValue', newValue);
@@ -24,7 +25,7 @@ const SliderComponent = () =>{
                                 min={1}
                                 max={50}
                                 onChange={onChange}
-                                value={number}
+                                value={Object.keys(edit).length === 0 ? number : edit.count}
                             />
                         </Col>
                         <Col span={4}>
@@ -34,7 +35,7 @@ const SliderComponent = () =>{
                                 style={{
                                     margin: '0 16px',
                                 }}
-                                value={number}
+                                value={Object.keys(edit).length === 0 ? number : edit.count}
                                 onChange={onChange}
                             />
                         </Col>

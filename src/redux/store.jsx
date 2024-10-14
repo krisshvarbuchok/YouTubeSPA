@@ -7,6 +7,7 @@ import warningSlice from "./listSlice/warningSlice";
 import ModalSlice from "./listSlice/ModalSlice";
 import changeNameInModalSlice from "./listSlice/changeNameInModalSlice";
 import gridNumberSlice from './listSlice/gridNumberSlice';
+import EditElementSlice from './listSlice/EditElementSlice'
 
 const store = configureStore({
     reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
         modal: ModalSlice,
         name: changeNameInModalSlice,
         number: gridNumberSlice,
+        edit: EditElementSlice,
     }
 })
 
