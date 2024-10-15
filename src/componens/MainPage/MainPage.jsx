@@ -16,11 +16,13 @@ const MainPage = () => {
 
 
     return (
-        <div className={styles.container}>
+        <>
             <Header />
-            {isActive === 'search' && <SearchBody />}
-            {isActive === 'favorite' && <FavoritesComponent />}
-        </div>
+            <div>
+                {isActive === 'search' && <SearchBody />}
+                {isActive === 'favorite' && <FavoritesComponent />}
+            </div>
+        </>
     )
 }
 

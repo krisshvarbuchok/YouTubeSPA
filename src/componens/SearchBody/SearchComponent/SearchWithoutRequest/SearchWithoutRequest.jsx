@@ -2,7 +2,7 @@ import { ConfigProvider, Input, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './searchWithoutRequest.module.css';
 import { HeartOutlined } from "@ant-design/icons";
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import isFavoriteHelper from "../../../../helper/isFavoriteHelper";
 
 const SearchWithoutRequest = forwardRef(({ handleChange, handleKeyDown, handleFavorite, handleClick }, ref) => {
@@ -29,12 +29,14 @@ const SearchWithoutRequest = forwardRef(({ handleChange, handleKeyDown, handleFa
 
                 }}
             >
-
-                <Input placeholder="Что будем смотреть?" ref={ref} value={request} className={styles.inputStyle}
-                    onChange={(e) => handleChange(e)} onKeyDown={(e) => handleKeyDown(e)} suffix={<HeartOutlined className={`${request.trim() === '' ? styles.disabled : styles.favorite} ${isFavoriteHelper(favorite, request) ? styles.active : ''}`} onClick={() => handleFavorite()} />} />
-                <Button type="primary" className={styles.buttonSearch} onClick={() => handleClick()}>Поиск</Button>
+                <div className={styles.container}>
+                    <Input placeholder="Что будем смотреть?" ref={ref} value={request} className={styles.inputStyle}
+                        onChange={(e) => handleChange(e)} onKeyDown={(e) => handleKeyDown(e)} 
+                        suffix={<HeartOutlined className={`${request.trim() === '' ? styles.disabled : styles.favorite} ${isFavoriteHelper(favorite, request) ? styles.active : ''}`} 
+                        onClick={() => handleFavorite()} />} />
+                    <Button type="primary" className={styles.buttonSearch} onClick={() => handleClick()}>Поиск</Button>
+                </div>
             </ConfigProvider>
-            {/* {warning === 'Запрос сохранен, если вы хотите изменить или удалить его, перейдите в раздел "Избранное"' && <WarningComponent />} */}
 
         </>
     )

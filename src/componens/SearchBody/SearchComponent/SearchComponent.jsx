@@ -58,16 +58,14 @@ const SearchComponent = () => {
 
     return (
         <>
-            <div className={styles.container}>
-                {data.length === 0 ? <SearchWithoutRequest handleChange={handleChange} handleKeyDown={handleKeyDown} ref={ref} handleFavorite={handleFavorite} handleClick={handleClick} /> :
-                    <div className={styles.inputStyle}>
-                        <Input placeholder="Что будем смотреть?" ref={ref} value={request} className={styles.input}
-                            onChange={(e) => handleChange(e)} onKeyDown={(e) => handleKeyDown(e)} suffix={<HeartOutlined className={`${styles.favorite} ${isFavoriteHelper(favorite, request) ? styles.active : ''}`} style={{fontSize: '20px'}} onClick={() => handleFavorite()} />} />
-                        <Button className={styles.button} onClick={() => handleClick()}>Поиск</Button>
-                    </div>
-                }
+            {data.length === 0 ? <SearchWithoutRequest handleChange={handleChange} handleKeyDown={handleKeyDown} ref={ref} handleFavorite={handleFavorite} handleClick={handleClick} /> :
 
-            </div >
+                <div className={styles.inputStyle}>
+                    <Input placeholder="Что будем смотреть?" ref={ref} value={request} className={styles.input}
+                        onChange={(e) => handleChange(e)} onKeyDown={(e) => handleKeyDown(e)} suffix={<HeartOutlined className={`${styles.favorite} ${isFavoriteHelper(favorite, request) ? styles.active : ''}`} style={{ fontSize: '20px' }} onClick={() => handleFavorite()} />} />
+                    <Button className={styles.button} onClick={() => handleClick()}>Поиск</Button>
+                </div>
+            }
             {warning === 'Запрос сохранен, если вы хотите изменить или удалить его, перейдите в раздел "Избранное"' && <WarningComponent />}
             {modal && <ModalWindow />}
         </>

@@ -1,6 +1,5 @@
 .container {
     display: flex;
-    /* margin: auto; */
 }
 
 .favorite:hover {
@@ -12,12 +11,8 @@
 }
 
 .inputStyle{
-    display: flex;
-    /* margin: auto; */
     height: 52px;
-    width: 1040px;
-    /* font-size: 20px; */
-
+    width: 100%;
 } 
 .input{
     font-size: 20px;

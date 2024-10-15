@@ -29,7 +29,7 @@ const SearchResult = () => {
     }
     return (
         <div >
-            <p>Видео по запросу "{requestTotal}" {totalResults}</p>
+            <p>Видео по запросу "{requestTotal}" {totalResults === 1000000 ? `более ${totalResults}` : totalResults}</p>
             <ul className={styles.grid}>
                 {data.slice(0, number).map(item =>{
                     return <li key={item.id.videoId || item.id.playlistId || item.id} className={styles.item}>

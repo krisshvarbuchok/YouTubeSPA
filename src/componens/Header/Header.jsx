@@ -7,13 +7,15 @@ const Header = () => {
 
     return (
         <div className={styles.header}>
-            <div className={styles.container} >
-                <div className={styles.searchAndHeader}>
-                    <img src="sibdev-logo.svg" alt="Logo" className={styles.logo} />
-                    <SearchHeader />
-                    <FavoritesHeader />
+            <div className="container1" >
+                <div className={styles.navigation}>
+                    <div className={styles.searchAndHeader}>
+                        <img src="sibdev-logo.svg" alt="Logo" className={styles.logo} />
+                        <SearchHeader />
+                        <FavoritesHeader />
+                    </div>
+                    <LogOut />
                 </div>
-                <LogOut />
             </div>
         </div>
     )

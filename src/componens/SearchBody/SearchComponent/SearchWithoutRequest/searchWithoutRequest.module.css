@@ -1,5 +1,6 @@
 .container{
     display: flex;
+    width: 80%;
 }
 .favorite:hover{
     color: crimson;
@@ -11,10 +12,12 @@
 .active{
     color: deeppink;
 }
-.inputStyle{
-    width: 686px;
+ .inputStyle{
+   
+    width: 100;
     height: 52px;
 }
 .buttonSearch{
+    
     width: 150px;
-}
+} 

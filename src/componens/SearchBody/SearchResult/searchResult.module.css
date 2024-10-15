@@ -1,5 +1,9 @@
 .container{
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
 .error{
     font-size: 16px;

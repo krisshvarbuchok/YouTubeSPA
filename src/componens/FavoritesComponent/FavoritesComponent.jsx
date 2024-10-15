@@ -15,7 +15,7 @@ const FavoritesComponent = () => {
     const favorite = useSelector(state => state.favorite);
     const dispatch = useDispatch();
     const modal = useSelector(state => state.modal);
-    console.log(favorite);
+    //console.log(favorite);
 
     const handleSearch = (request) => {
         dispatch(searchRequest(request))
@@ -36,7 +36,7 @@ const FavoritesComponent = () => {
 
     return (
         <>
-            <div className={styles.container}>
+            <div className="container1">
                 <div className={styles.text}>Избранное</div>
                 <ul className={styles.list}>
                     {favorite.map(item => {
@@ -48,7 +48,6 @@ const FavoritesComponent = () => {
                             <div className={styles.editAndDelete}>
 
                                 <Button className={styles.edit} onClick={() => handleEdit(item)}><EditOutlined style={{ fontSize: '25px', color: '#39f' }} /></Button>
-
                                 <Button className={styles.delete} onClick={() => handleDelete(item.id)}><DeleteOutlined style={{ fontSize: '25px', color: '#39f' }} /></Button>
                             </div>
                         </li>

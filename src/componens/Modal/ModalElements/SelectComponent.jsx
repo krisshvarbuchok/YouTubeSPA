@@ -5,16 +5,20 @@ const SelectComponent = () => {
     
     const options = [
         {
-          value: 'zhejiang',
-          label: 'Zhejiang',
+          value: 'chart',
+          label: 'Чарт',
           children: [
             {
-              value: 'hangzhou',
-              label: 'Hangzhou',
+              value: 'chartUnspecified',
+              label: 'нет',
+            },
+            {
+              value: 'mostPopular',
+              label: 'популярное',
               children: [
                 {
-                  value: 'xihu',
-                  label: 'West Lake',
+                  value: 'videoCategoryId',
+                  label: 'выберите категорию',
                 },
               ],
             },
