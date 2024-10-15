@@ -11,7 +11,7 @@ const favoriteSlice = createSlice({
             return state = state.filter(item => item.id !== action.payload)
         },
         editFavorite: (state, action) => {
-           return state.map(item  => item.id === action.payload.id ? {...item, request: action.payload.request, name: action.payload.name} : item);
+           return state.map(item  => item.id === action.payload.id ? {...item, request: action.payload.request, name: action.payload.name, count: action.payload.count} : item);
         
         }
     }

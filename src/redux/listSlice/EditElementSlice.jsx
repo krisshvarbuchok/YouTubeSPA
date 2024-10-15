@@ -12,8 +12,11 @@ const EditElementSlice = createSlice({
         },
         changeNameInEdit: (state, action) => {
             state.name = action.payload;
+        },
+        changeNumberInEdit: (state, action) => {
+            state.count = action.payload;
         }
     }
 })
-export const {editElement, changeRequest, changeNameInEdit} = EditElementSlice.actions;
+export const {editElement, changeRequest, changeNameInEdit, changeNumberInEdit} = EditElementSlice.actions;
 export default EditElementSlice.reducer;

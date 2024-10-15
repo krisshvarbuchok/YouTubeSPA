@@ -2,6 +2,7 @@ import { Button, Input, Modal, Col, InputNumber, Row, Slider, Space, Cascader } 
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeNumber } from '../../../redux/listSlice/gridNumberSlice';
+import { changeNumberInEdit } from '../../../redux/listSlice/EditElementSlice';
 
 
 const SliderComponent = () =>{
@@ -12,8 +13,17 @@ const SliderComponent = () =>{
     
     const onChange = (newValue) => {
         console.log('newValue', newValue);
+        console.log('edit', edit, Object.keys(edit).length);
         
-        dispatch(changeNumber(newValue));
+        if(Object.keys(edit).length === 0){
+            console.log(edit);
+            
+            dispatch(changeNumber(newValue));
+         } else {
+            console.log(edit);
+            
+            dispatch(changeNumberInEdit(newValue));
+        }
     };
 
 

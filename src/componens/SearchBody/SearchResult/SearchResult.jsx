@@ -32,7 +32,7 @@ const SearchResult = () => {
         <div >
             <ul className={styles.grid}>
                 {data.slice(0, number).map(item =>{
-                    return <li key={item.id.videoId || item.id.playlistId} className={styles.item}>
+                    return <li key={item.id.videoId || item.id.playlistId || item.id} className={styles.item}>
                         <img
                                 src={item.snippet.thumbnails.high.url}
                                 alt={item.snippet.title}
