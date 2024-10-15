@@ -36,8 +36,6 @@ const fetchAuthorization= createAsyncThunk('list/fetchAuthorization' , async(obj
 //     }
 // }
 const getVideos = async (request) => {
-    // console.log(localStorage.getItem('token'));
-    
      
      const response = await axios.get ('https://www.googleapis.com/youtube/v3/search', {
         params:{
@@ -48,13 +46,12 @@ const getVideos = async (request) => {
                 maxResults: 50   // максимальное количество видео
         }
     });
-     console.log(response.data.items);
-     return response.data.items;
+     console.log('count', response.data.pageInfo.totalResults);
+     return {data: response.data.items, totalResults: response.data.pageInfo.totalResults};
  }
- //getVideos()
 
  const fetchGetVideos = createAsyncThunk('video/fetchGetVideos', async(request) =>{
-    console.log('fetch request', request);
+    //console.log('fetch request', request);
     
     const data = await getVideos(request)
     return data
@@ -100,7 +97,7 @@ const listSlice = createSlice({
             })
             .addCase(fetchAuthorization.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload;
+                //state.error = action.payload;
             })
             .addCase(fetchGetVideos.pending, (state, action) =>{
                 state.status = 'loading'

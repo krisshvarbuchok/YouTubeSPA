@@ -44,13 +44,6 @@ const SignIn = () => {
                 <div  >
                     <label className={styles.label}>Логин</label>
                     <div>
-                        {/* <Input  {...register('email', {
-                            required: 'Обязательное поле',
-                            pattern: {
-                                value: /^[A-Za-z0-9-_.%+&]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
-                                message: 'Введите валидный email',
-                            }
-                        })} /> */}
                         <Controller
                             name="email"
                             control={control}
@@ -71,9 +64,6 @@ const SignIn = () => {
                 <div    >
                     <label className={styles.label}>Пароль</label>
                     <div>
-                        {/* <Input.Password type="password" {...register('password', {
-                            required: 'Обязательное поле',
-                        })} /> */}
                         <Controller
                             name="password"
                             control={control}

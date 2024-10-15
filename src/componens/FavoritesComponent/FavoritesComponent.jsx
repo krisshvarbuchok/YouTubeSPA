@@ -4,29 +4,27 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { deleteFavorite } from "../../redux/listSlice/favoriteSlice";
 import { fetchGetVideos } from "../../redux/listSlice/listSlice";
-import { useNavigate } from "react-router-dom";
 import { isActiveButton } from "../../redux/listSlice/isActiveButtonSlice";
 import ModalWindow from "../Modal/ModalWindow";
 import { isModalOpen } from "../../redux/listSlice/ModalSlice";
 import { editElement } from "../../redux/listSlice/EditElementSlice";
 import { writeRequest } from "../../redux/listSlice/Request";
+import { searchRequest } from "../../redux/listSlice/RequestTotalSlice";
 
 const FavoritesComponent = () => {
     const favorite = useSelector(state => state.favorite);
     const dispatch = useDispatch();
     const modal = useSelector(state => state.modal);
-    //const navigate = useNavigate();
     console.log(favorite);
 
     const handleSearch = (request) => {
+        dispatch(searchRequest(request))
         dispatch(writeRequest(request))
         dispatch(fetchGetVideos(request));
         dispatch(isActiveButton('search'))
     }
 
     const handleEdit = (item) => {
-        //console.log('item',item);
-
         dispatch(editElement(item))
         dispatch(isModalOpen(true));
     }

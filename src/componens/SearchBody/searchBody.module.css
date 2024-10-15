@@ -1,4 +1,7 @@
 .containerBig{
+    /* width: 100%; */
+    /* display: flex;
+    justify-content: center; */
     width: 1040px;
     margin: auto;
 }
@@ -8,6 +11,7 @@
     flex-direction: column;
     align-content: center;
     align-items: center;
+    /* width: 1040px; */
     margin-top: 200px;
     gap: 40px;
 }

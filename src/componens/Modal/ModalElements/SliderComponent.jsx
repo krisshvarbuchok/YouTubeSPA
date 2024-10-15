@@ -1,27 +1,18 @@
-import { Button, Input, Modal, Col, InputNumber, Row, Slider, Space, Cascader } from 'antd';
-import React, { useState } from 'react';
+import { Col, InputNumber, Row, Slider } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeNumber } from '../../../redux/listSlice/gridNumberSlice';
 import { changeNumberInEdit } from '../../../redux/listSlice/EditElementSlice';
 
 
 const SliderComponent = () =>{
-    //const [inputValue, setInputValue] = useState(1);
     const dispatch = useDispatch();
     const number = useSelector(state => state.number);
     const edit = useSelector(state => state.edit);
     
     const onChange = (newValue) => {
-        console.log('newValue', newValue);
-        console.log('edit', edit, Object.keys(edit).length);
-        
         if(Object.keys(edit).length === 0){
-            console.log(edit);
-            
             dispatch(changeNumber(newValue));
          } else {
-            console.log(edit);
-            
             dispatch(changeNumberInEdit(newValue));
         }
     };

@@ -1,15 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from './searchResult.module.css';
-import { Card, List } from 'antd';
 import { fetchGetMoreInfoAboutVideo } from "../../../redux/listSlice/listSlice";
 import { useEffect } from "react";
 
 const SearchResult = () => {
     const dispatch = useDispatch();
-    const { data } = useSelector(state => state.list);
+    const { data : {data, totalResults} } = useSelector(state => state.list);
+    console.log('data' , totalResults);
+    
     const { status, error } = useSelector(state => state.list);
     const { stats } = useSelector(state => state.list);
     const request = useSelector(state => state.request);
+    const requestTotal = useSelector(state => state.requestTotal)
     //console.log('stats' , stats);
     const favorite = useSelector(state => state.favorite);
     const countFavorite = favorite.find(item => item.request === request)?.count;
@@ -25,11 +27,9 @@ const SearchResult = () => {
     if (status === 'loading') {
         return <div className={styles.error}>...loading</div>
     }
-    if (status === 'failed') {
-        return <div className={styles.error}>УПС... что-то пошло не так: {error.message}</div>
-    }
     return (
         <div >
+            <p>Видео по запросу "{requestTotal}" {totalResults}</p>
             <ul className={styles.grid}>
                 {data.slice(0, number).map(item =>{
                     return <li key={item.id.videoId || item.id.playlistId || item.id} className={styles.item}>

@@ -1,30 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import { writeRequest } from "../../../redux/listSlice/Request";
-import { fetchGetVideos, fetchGetMoreInfoAboutVideo } from "../../../redux/listSlice/listSlice";
+import { fetchGetVideos } from "../../../redux/listSlice/listSlice";
 import { useEffect, useRef } from "react";
 import { Input, Button } from 'antd';
 import styles from './searchComponent.module.css';
 import { HeartOutlined } from "@ant-design/icons";
 import SearchWithoutRequest from "./SearchWithoutRequest/SearchWithoutRequest";
-import { useNavigate } from "react-router-dom";
 import { addFavorite } from "../../../redux/listSlice/favoriteSlice";
 import WarningComponent from "../../Warning/WarningComponent";
 import { getWarning } from "../../../redux/listSlice/warningSlice";
 import { isModalOpen } from "../../../redux/listSlice/ModalSlice";
 import ModalWindow from "../../Modal/ModalWindow";
 import isFavoriteHelper from "../../../helper/isFavoriteHelper";
+import { searchRequest } from "../../../redux/listSlice/RequestTotalSlice";
 
 const SearchComponent = () => {
     const ref = useRef(null);
     const dispatch = useDispatch();
     const request = useSelector(state => state.request);
     const { data } = useSelector(state => state.list);
-    //const { status, error } = useSelector(state => state.list);
     const favorite = useSelector(state => state.favorite);
-    //const navigate = useNavigate();
     const warning = useSelector(state => state.warning);
     const modal = useSelector(state => state.modal);
-    //const edit = useSelector(state => state.edit)
 
 
     useEffect(() => {
@@ -34,8 +31,10 @@ const SearchComponent = () => {
     const handleClick = () => {
         console.log('выполнить поиск видео', request);
         if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
+            dispatch(searchRequest(favorite.find(item => item.request === request)?.name))
             dispatch(fetchGetVideos(favorite.find(item => item.request === request)?.name))
         } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) {
+            dispatch(searchRequest(request))
             dispatch(fetchGetVideos(request))
         }
     }
