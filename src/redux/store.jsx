@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import listSlice from "./listSlice/listSlice";
-import RequestSlice from "./listSlice/Request";
+import RequestSlice from "./listSlice/RequestSlice";
 import isActiveButtonSlice from "./listSlice/isActiveButtonSlice";
 import favoriteSlice from "./listSlice/favoriteSlice";
 import warningSlice from "./listSlice/warningSlice";

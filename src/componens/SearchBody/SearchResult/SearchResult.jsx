@@ -35,7 +35,7 @@ const SearchResult = () => {
 
             <ul className={display === 'grid' ? styles.grid : styles.flex}>
                 {data.slice(0, number).map(item => {
-                    return <li key={item.id.videoId || item.id.playlistId || item.id} className={display === 'grid' ? styles.item : styles.itemFlex}>
+                    return <li key={item.id.videoId || item.id} className={display === 'grid' ? styles.item : styles.itemFlex}>
                         <div>
                             <img
                                 src={item.snippet.thumbnails.high.url}

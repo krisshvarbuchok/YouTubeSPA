@@ -43,6 +43,7 @@ const getVideos = async (request) => {
                 
                 key: import.meta.env.VITE_API_KEY,
                 q: request,      // запрос поиска
+                type: 'video',
                 maxResults: 50   // максимальное количество видео
         }
     });

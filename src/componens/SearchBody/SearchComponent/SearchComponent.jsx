@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { writeRequest } from "../../../redux/listSlice/Request";
+import { writeRequest } from "../../../redux/listSlice/RequestSlice";
 import { fetchGetVideos } from "../../../redux/listSlice/listSlice";
 import { useEffect, useRef } from "react";
 import { Input, Button } from 'antd';
 import styles from './searchComponent.module.css';
 import { HeartOutlined } from "@ant-design/icons";
 import SearchWithoutRequest from "./SearchWithoutRequest/SearchWithoutRequest";
-import { addFavorite } from "../../../redux/listSlice/favoriteSlice";
 import WarningComponent from "../../Warning/WarningComponent";
 import { getWarning } from "../../../redux/listSlice/warningSlice";
 import { isModalOpen } from "../../../redux/listSlice/ModalSlice";

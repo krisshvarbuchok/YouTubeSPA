@@ -8,7 +8,7 @@ import { isActiveButton } from "../../redux/listSlice/isActiveButtonSlice";
 import ModalWindow from "../Modal/ModalWindow";
 import { isModalOpen } from "../../redux/listSlice/ModalSlice";
 import { editElement } from "../../redux/listSlice/EditElementSlice";
-import { writeRequest } from "../../redux/listSlice/Request";
+import { writeRequest } from "../../redux/listSlice/RequestSlice";
 import { searchRequest } from "../../redux/listSlice/RequestTotalSlice";
 
 const FavoritesComponent = () => {
