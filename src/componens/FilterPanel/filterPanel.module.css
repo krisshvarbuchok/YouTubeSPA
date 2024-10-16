@@ -1,0 +1,25 @@
+.panel{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.subString{
+    color: gray;
+}
+.icon{
+    display: flex;
+    gap: 15px;
+}
+.list, .active, .grid {
+    transition: all 0.3s ease;
+}
+.active{
+    font-size: 34px;
+}
+.list{
+    font-size: 22px;
+}
+.grid{
+    font-size: 24px;
+}

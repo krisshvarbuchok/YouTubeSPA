@@ -11,10 +11,11 @@
 }
 
 .inputStyle{
-    height: 52px;
+    display: flex;
     width: 100%;
 } 
 .input{
+    height: 52px;
     font-size: 20px;
 }
 .button{

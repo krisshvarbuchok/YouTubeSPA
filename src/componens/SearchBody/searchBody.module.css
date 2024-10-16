@@ -14,9 +14,10 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    width: 1040px;
 }
 
 .searchVideo{
     font-size: 36px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }

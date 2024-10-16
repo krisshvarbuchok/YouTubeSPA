@@ -9,6 +9,7 @@ import changeNameInModalSlice from "./listSlice/changeNameInModalSlice";
 import gridNumberSlice from './listSlice/gridNumberSlice';
 import EditElementSlice from './listSlice/EditElementSlice';
 import RequestTotalSlice from './listSlice/RequestTotalSlice';
+import DisplaySlice from './listSlice/DisplaySlice';
 
 const store = configureStore({
     reducer: {
@@ -22,7 +23,7 @@ const store = configureStore({
         number: gridNumberSlice,
         edit: EditElementSlice,
         requestTotal: RequestTotalSlice,
-
+        display: DisplaySlice,
     }
 })
 

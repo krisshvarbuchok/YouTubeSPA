@@ -5,20 +5,90 @@
     align-content: center;
     align-items: center;
 }
+
 .error{
     font-size: 16px;
-    /* position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
 }
 .grid{
     display: grid;
-    grid-template-columns:repeat(4, 1fr);
-    grid-gap: 10px;
-    padding-left: 0;
+    grid-template-columns: repeat(4, 245px); /* 4 колонки шириной по 245px */
+    grid-template-rows: repeat(auto-fill, 226px); /* Высота строк 226px */
+    grid-gap: 20px;
+    padding: 0;
+    box-sizing: border-box;
+}
+@media (max-width: 1080px) {
+    .grid {
+        grid-template-columns: repeat(3, 245px); /* 2 колонки при уменьшении экрана */
+    }
+}
+
+@media (max-width: 800px) {
+    .grid {
+        grid-template-columns: repeat(2, 245px);
+    }
+}
+@media (max-width: 510px) {
+    .grid {
+        grid-template-columns:repeat(auto-fit, minmax(245px, 1fr)); /* 1 колонка на маленьких экранах */
+    }
 }
 .item{
     list-style: none;
+    box-sizing: border-box;
+    height: 100%;
+}
+.title{
+    height: 42px;             /* Высота, исходя из высоты строки */
+    overflow: hidden;         /* Скрываем всё, что не помещается */
+    text-overflow: ellipsis;  /* Добавляем многоточие */
+    display: block;           /* Обычный блочный контейнер */
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 21px;  
+}
+.channel{
+    font-size: 14px;
+    color: gray;
+    margin: 0;
+}
+.views{
+    font-size: 14px;
+    color: grey;
+    margin: 0;
+}
+.img{
+    width: 245px;
+    height: 138px;
+}
+.flex{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
     padding-left: 0;
+    width: 80%;
+    height: 88px;
+}
+.itemFlex{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+}
+.titleFlex{
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 21px; 
+}
+.imgFlex{
+    width: 157px;
+    height: 88px;
+}
+.channelFlex{
+    font-size: 16px;
+    color: gray;
+    margin: 0;
+    margin-top: 8px;
 }
