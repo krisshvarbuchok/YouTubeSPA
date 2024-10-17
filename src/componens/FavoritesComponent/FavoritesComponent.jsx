@@ -18,11 +18,12 @@ const FavoritesComponent = () => {
     const favorite = useSelector(state => state.favorite);
     const dispatch = useDispatch();
     const modal = useSelector(state => state.modal);
+    
 
-    const handleSearch = (request) => {
+    const handleSearch = (request, select) => {
         dispatch(searchRequest(request))
         dispatch(writeRequest(request))
-        dispatch(fetchGetVideos(request));
+        dispatch(fetchGetVideos({request, select}));
         dispatch(isActiveButton('search'))
     }
 
@@ -56,8 +57,8 @@ const FavoritesComponent = () => {
                     {favorite.map(item => {
                         return <li key={item.id} className={styles.string}>
                             {item.name.trim() === '' ?
-                                <div className={styles.item} onClick={() => handleSearch(item.request)}>{item.request}</div> :
-                                <div className={styles.item} onClick={() => handleSearch(item.name)}>{item.name}</div>}
+                                <div className={styles.item} onClick={() => handleSearch(item.request, item.select)}>{item.request}</div> :
+                                <div className={styles.item} onClick={() => handleSearch(item.name, item.select)}>{item.name}</div>}
 
                             <div className={styles.editAndDelete}>
 

@@ -1,37 +1,53 @@
-import { Button, Input, Modal, Col, InputNumber, Row, Slider, Space, Cascader } from 'antd';
+import { Cascader } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeSelect } from '../../../redux/listSlice/SelectSlice';
+import { chahgeSelectInEdit } from '../../../redux/listSlice/EditElementSlice';
 
 
 const SelectComponent = () => {
+  const select = useSelector(state => state.select);
+  const dispatch = useDispatch();
+  const edit = useSelector(state => state.edit);
     
     const options = [
         {
-          value: 'chart',
-          label: 'Чарт',
-          children: [
-            {
-              value: 'chartUnspecified',
-              label: 'нет',
-            },
-            {
-              value: 'mostPopular',
-              label: 'популярное',
-              children: [
-                {
-                  value: 'videoCategoryId',
-                  label: 'выберите категорию',
-                },
-              ],
-            },
-          ],
+          value: 'searchSortUnspecified',
+          label: 'Без сортировки',
         },
+        {
+          value: 'date',
+          label: 'По дате',
+        },
+        {
+          value: 'rating',
+          label: 'По рейтингу',
+        },
+        {
+          value: 'relevance',
+          label: 'По запросу',
+        },
+        {
+          value: 'title',
+          label: 'По алфавиту',
+        },
+        {
+          value: 'viewCount',
+          label: 'По просмотрам',
+        }
     ];
 
     const onChange = (value) => {
-        console.log(value);
+      console.log(...value);
+      if(Object.keys(edit).length === 0){
+        dispatch(changeSelect(value[0]));;
+     } else {
+        dispatch(chahgeSelectInEdit(value[0]));
+    }
+       
       };
     return (
         <div>Сортировать по
-            <Cascader options={options} onChange={onChange} placeholder="Please select" />
+            <Cascader options={options} onChange={onChange} value={[select]} />
         </div>
     )
 }

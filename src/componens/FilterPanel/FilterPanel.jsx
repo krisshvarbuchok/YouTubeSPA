@@ -9,8 +9,7 @@ const FilterPanel = () => {
     const { data: { totalResults } } = useSelector(state => state.list);
     const display = useSelector(state => state.display);
     const dispatch = useDispatch();
-    console.log(display);
-    
+   
 
     return (
         <div className={styles.panel}>

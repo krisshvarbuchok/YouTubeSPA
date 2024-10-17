@@ -10,6 +10,7 @@ import gridNumberSlice from './listSlice/gridNumberSlice';
 import EditElementSlice from './listSlice/EditElementSlice';
 import RequestTotalSlice from './listSlice/RequestTotalSlice';
 import DisplaySlice from './listSlice/DisplaySlice';
+import SelectSlice from './listSlice/SelectSlice';
 
 const store = configureStore({
     reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
         edit: EditElementSlice,
         requestTotal: RequestTotalSlice,
         display: DisplaySlice,
+        select: SelectSlice,
     }
 })
 

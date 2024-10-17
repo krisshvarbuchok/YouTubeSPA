@@ -14,6 +14,7 @@ import WarningComponent from '../Warning/WarningComponent';
 import { changeNameInEdit, changeRequest, editElement } from '../../redux/listSlice/EditElementSlice';
 import addFavoritesLocal from '../../localStorage/addFavorites';
 import editFavoritesLocal from '../../localStorage/editFavorites';
+import { changeSelect } from '../../redux/listSlice/SelectSlice';
 
 
 const ModalWindow = () => {
@@ -25,7 +26,9 @@ const ModalWindow = () => {
     const number = useSelector(state => state.number);
     const warning = useSelector(state => state.warning);
     const edit = useSelector(state => state.edit);
-   
+    const select = useSelector(state => state.select);
+    console.log(select);
+    
 
     const handleClick = () => {
         if (Object.keys(edit).length !== 0) {
@@ -44,12 +47,13 @@ const ModalWindow = () => {
         } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request) && name !== '') {
             //console.log(favorite);
             
-            dispatch(addFavorite({ request: request, name: name, id: crypto.randomUUID(), select: 'withoutSelect', count: number }));
-            addFavoritesLocal(localStorage.getItem('userName'), { request: request, name: name, id: crypto.randomUUID(), select: 'withoutSelect', count: number });
+            dispatch(addFavorite({ request: request, name: name, id: crypto.randomUUID(), select: select, count: number }));
+            addFavoritesLocal(localStorage.getItem('userName'), { request: request, name: name, id: crypto.randomUUID(), select: select, count: number });
             dispatch(isModalOpen(false));
             dispatch(changeName(''));
             dispatch(changeNumber(12));
-            dispatch(editElement({}))
+            dispatch(editElement({}));
+            dispatch(changeSelect('searchSortUnspecified'))
         }
     }
 

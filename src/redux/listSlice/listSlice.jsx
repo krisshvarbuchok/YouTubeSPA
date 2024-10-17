@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Select } from "antd";
 import axios from "axios";
 
 const config = {
@@ -14,7 +15,7 @@ const api = axios.create({
 
 const authorization = async (obj) => {
     const response = await api.post('/auth/login', obj, config);
-    console.log(response);
+    //console.log(response);
     localStorage.setItem('token', response.data.token);
     //console.log('захожу', response.data.token);
     //return response.data;
@@ -36,19 +37,19 @@ const fetchAuthorization= createAsyncThunk('list/fetchAuthorization' , async(obj
 //             maxResults: 10   // максимальное количество видео
 //     }
 // }
-const getVideos = async (request) => {
+const getVideos = async ({request, select }) => {
+     console.log('get', select);
      
      const response = await axios.get ('https://www.googleapis.com/youtube/v3/search', {
         params:{
                 part: 'snippet', // указываем какие данные хотим получить
-                
+                order: select,
                 key: import.meta.env.VITE_API_KEY,
                 q: request,      // запрос поиска
                 type: 'video',
                 maxResults: 50   // максимальное количество видео
         }
     });
-     console.log('count', response.data.pageInfo.totalResults);
      return {data: response.data.items, totalResults: response.data.pageInfo.totalResults};
  }
 
@@ -62,7 +63,7 @@ const getVideos = async (request) => {
  const getMoreInfoAboutVideo = async (videoId) =>{
     const response = await axios.get ('https://www.googleapis.com/youtube/v3/videos', {
         params: {
-            part: 'statistics',
+            part: 'snippet, statistics',
             id: videoId,
             key: import.meta.env.VITE_API_KEY,
         },

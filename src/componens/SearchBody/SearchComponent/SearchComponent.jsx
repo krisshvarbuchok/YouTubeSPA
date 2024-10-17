@@ -21,6 +21,9 @@ const SearchComponent = () => {
     const favorite = useSelector(state => state.favorite);
     const warning = useSelector(state => state.warning);
     const modal = useSelector(state => state.modal);
+    const select = useSelector(state => state.select);
+    console.log('search', select);
+
     //const email = useSelector(state => state.email);
 
 
@@ -32,10 +35,13 @@ const SearchComponent = () => {
         console.log('выполнить поиск видео', request);
         if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
             dispatch(searchRequest(favorite.find(item => item.request === request)?.name))
-            dispatch(fetchGetVideos(favorite.find(item => item.request === request)?.name))
+            dispatch(fetchGetVideos({
+                request: favorite.find(item => item.request === request)?.name,
+                select: favorite.find(item => item.request === request)?.select
+            }))
         } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) {
             dispatch(searchRequest(request))
-            dispatch(fetchGetVideos(request))
+            dispatch(fetchGetVideos({request, select}))
         }
     }
     const handleKeyDown = (e) => {
