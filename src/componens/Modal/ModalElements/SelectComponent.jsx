@@ -47,7 +47,7 @@ const SelectComponent = () => {
       };
     return (
         <div>Сортировать по
-            <Cascader options={options} onChange={onChange} value={[select]} />
+            <Cascader options={options} onChange={onChange} value={Object.keys(edit).length === 0 ? [select] : [edit.select]} />
         </div>
     )
 }

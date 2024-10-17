@@ -28,7 +28,7 @@ const ModalWindow = () => {
     const edit = useSelector(state => state.edit);
     const select = useSelector(state => state.select);
     console.log(select);
-    
+
 
     const handleClick = () => {
         if (Object.keys(edit).length !== 0) {
@@ -41,19 +41,22 @@ const ModalWindow = () => {
                 //dispatch(changeName(''));
                 dispatch(changeNumber(12));
                 dispatch(editElement({}))
+                console.log((select));
+                
+                //dispatch(changeSelect('searchSortUnspecified'))
             }
         } else if (name.trim() === '') {
             dispatch(getWarning('Заполните поле "Название"'))
         } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request) && name !== '') {
             //console.log(favorite);
-            
+
             dispatch(addFavorite({ request: request, name: name, id: crypto.randomUUID(), select: select, count: number }));
             addFavoritesLocal(localStorage.getItem('userName'), { request: request, name: name, id: crypto.randomUUID(), select: select, count: number });
             dispatch(isModalOpen(false));
             dispatch(changeName(''));
             dispatch(changeNumber(12));
             dispatch(editElement({}));
-            dispatch(changeSelect('searchSortUnspecified'))
+            dispatch(changeSelect('searchSortUnspecified'));
         }
     }
 
