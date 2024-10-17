@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from './favoriteComponent.module.css';
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { deleteFavorite } from "../../redux/listSlice/favoriteSlice";
+import { deleteFavorite, initialFavorite } from "../../redux/listSlice/favoriteSlice";
 import { fetchGetVideos } from "../../redux/listSlice/listSlice";
 import { isActiveButton } from "../../redux/listSlice/isActiveButtonSlice";
 import ModalWindow from "../Modal/ModalWindow";
@@ -10,12 +10,14 @@ import { isModalOpen } from "../../redux/listSlice/ModalSlice";
 import { editElement } from "../../redux/listSlice/EditElementSlice";
 import { writeRequest } from "../../redux/listSlice/RequestSlice";
 import { searchRequest } from "../../redux/listSlice/RequestTotalSlice";
+import { useEffect } from "react";
+import getFavoritesLocal from "../../localStorage/getFavorites";
+import removeFavoritesLocal from "../../localStorage/removeFavorites";
 
 const FavoritesComponent = () => {
     const favorite = useSelector(state => state.favorite);
     const dispatch = useDispatch();
     const modal = useSelector(state => state.modal);
-    //console.log(favorite);
 
     const handleSearch = (request) => {
         dispatch(searchRequest(request))
@@ -30,9 +32,21 @@ const FavoritesComponent = () => {
     }
 
     const handleDelete = (id) => {
-        dispatch(deleteFavorite(id))
+        dispatch(deleteFavorite(id));
+        removeFavoritesLocal(localStorage.getItem('userName'), id)
     }
-
+    useEffect(()=>{
+        const savedEmail = localStorage.getItem('userName');
+        //console.log('savedEmail',savedEmail);
+        console.log(localStorage);
+        
+        
+        if(savedEmail){
+            //console.log('this',getFavoritesLocal(savedEmail));
+            
+            dispatch(initialFavorite(getFavoritesLocal(savedEmail)));
+        }
+    }, [dispatch])
 
     return (
         <>

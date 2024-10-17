@@ -12,6 +12,8 @@ import { changeNumber } from '../../redux/listSlice/gridNumberSlice';
 import { getWarning } from '../../redux/listSlice/warningSlice';
 import WarningComponent from '../Warning/WarningComponent';
 import { changeNameInEdit, changeRequest, editElement } from '../../redux/listSlice/EditElementSlice';
+import addFavoritesLocal from '../../localStorage/addFavorites';
+import editFavoritesLocal from '../../localStorage/editFavorites';
 
 
 const ModalWindow = () => {
@@ -23,6 +25,7 @@ const ModalWindow = () => {
     const number = useSelector(state => state.number);
     const warning = useSelector(state => state.warning);
     const edit = useSelector(state => state.edit);
+   
 
     const handleClick = () => {
         if (Object.keys(edit).length !== 0) {
@@ -30,6 +33,7 @@ const ModalWindow = () => {
                 dispatch(getWarning('Заполните поле "Запрос"'))
             } else {
                 dispatch(editFavorite(edit));
+                editFavoritesLocal(localStorage.getItem('userName'), edit);
                 dispatch(isModalOpen(false));
                 //dispatch(changeName(''));
                 dispatch(changeNumber(12));
@@ -38,7 +42,10 @@ const ModalWindow = () => {
         } else if (name.trim() === '') {
             dispatch(getWarning('Заполните поле "Название"'))
         } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request) && name !== '') {
+            //console.log(favorite);
+            
             dispatch(addFavorite({ request: request, name: name, id: crypto.randomUUID(), select: 'withoutSelect', count: number }));
+            addFavoritesLocal(localStorage.getItem('userName'), { request: request, name: name, id: crypto.randomUUID(), select: 'withoutSelect', count: number });
             dispatch(isModalOpen(false));
             dispatch(changeName(''));
             dispatch(changeNumber(12));
@@ -81,6 +88,6 @@ const ModalWindow = () => {
 }
 export default ModalWindow;
 
+//сделать пагинацию
 //получить список в селект от ютуба по сортировке
 //переделать количество выводимых видео, когда выводит поиск избранного и потом стираешь количсетво сразу меняется
-//сохранить запросы в локалсторидж? для каждого пользователя сохранять свои запросы

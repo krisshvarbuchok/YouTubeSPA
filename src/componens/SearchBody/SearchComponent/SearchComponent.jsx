@@ -21,6 +21,7 @@ const SearchComponent = () => {
     const favorite = useSelector(state => state.favorite);
     const warning = useSelector(state => state.warning);
     const modal = useSelector(state => state.modal);
+    //const email = useSelector(state => state.email);
 
 
     useEffect(() => {

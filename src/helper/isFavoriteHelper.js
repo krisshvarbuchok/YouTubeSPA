@@ -1,7 +1,6 @@
-import favoriteSlice from "../redux/listSlice/favoriteSlice";
 
 const isFavoriteHelper = (data, request) => {
-    //console.log(data, request);
+    console.log(data, request);
 
     return data.some(item => {
         //console.log(item.request.trim().toLowerCase() === request.trim().toLowerCase());

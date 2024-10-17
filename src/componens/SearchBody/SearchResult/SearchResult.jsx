@@ -29,6 +29,9 @@ const SearchResult = () => {
     if (status === 'loading') {
         return <div className={styles.error}>...loading</div>
     }
+    if(status === 'failed'){
+        return <div>УПС... что-то пошло не так: {error.message}</div>;
+    }
     return (
         <>
             <FilterPanel />

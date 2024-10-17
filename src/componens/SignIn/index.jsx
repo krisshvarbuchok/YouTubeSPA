@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import styles from './index.module.css';
 import { Button, ConfigProvider, Input } from 'antd';
+import { getWarning } from "../../redux/listSlice/warningSlice";
+import WarningComponent from "../Warning/WarningComponent";
 
 
 const SignIn = () => {
@@ -11,30 +13,40 @@ const SignIn = () => {
     const { control, register, handleSubmit, formState: { errors } } = useForm();
     const { status, error } = useSelector(state => state.list);
     const dispatch = useDispatch();
+    const warning = useSelector(state=> state.warning);
+    
 
     const handleClick = () => {
         navigate('/google')
     }
     const onSubmit = (data) => {
 
-        console.log(data);
+        //console.log(data);
+
         dispatch(fetchAuthorization(data))
             .unwrap()  // Дожидаемся окончания действия
             .then(() => {
+                //console.log(data);
+                
+                localStorage.setItem('userName', data.email)
+                //console.log('втход',localStorage.getItem('userName'));
+                
                 navigate('/authenticated');  // Редирект после успешной авторизации
             })
             .catch((error) => {
+                dispatch(getWarning('Ошибка авторизации'));
                 console.error('Ошибка авторизации:', error);
             });
     }
     if (status === 'loading') {
         return <div>...loading</div>
     }
-    if (status === 'failed') {
-        return <div>УПС... что-то пошло не так: {error.message}</div>
+    if(warning === 'Ошибка авторизации') {
+        return <WarningComponent />
     }
 
     return (
+        <>
         <div className={styles.container}>
             <div>
                 <img src="sibdev-logo.svg" alt="Logo" className={styles.logo} />
@@ -97,6 +109,7 @@ const SignIn = () => {
 
             <Button onClick={handleClick} >Вход через аккаунт Google</Button>
         </div>
+        </>
     )
 }
 export default SignIn;

@@ -22,6 +22,7 @@ const authorization = async (obj) => {
 
 const fetchAuthorization= createAsyncThunk('list/fetchAuthorization' , async(obj) =>{
     const data = await authorization(obj);
+    
     return data;
 })
 
@@ -86,7 +87,11 @@ const listSlice = createSlice({
         status: null,
         error: null,
     },
-    reducers: {},
+    reducers: {
+        removeList: (state, action) => {
+            state.data = action.payload;
+        }
+    },
     extraReducers: (builder)=>{
         builder
             .addCase(fetchAuthorization.pending, (state, action) =>{
@@ -119,6 +124,6 @@ const listSlice = createSlice({
 
     
 });
-
+export const { removeList } = listSlice.actions;
 export {fetchAuthorization, fetchGetVideos, fetchGetMoreInfoAboutVideo}
 export default listSlice.reducer;
