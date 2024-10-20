@@ -15,9 +15,12 @@ const SearchResult = () => {
     //const requestTotal = useSelector(state => state.requestTotal)
     //console.log('stats' , stats);
     const favorite = useSelector(state => state.favorite);
-    const countFavorite = favorite.find(item => item.request === request)?.count;
-    const number = countFavorite ? countFavorite : 12;
+    //const countFavorite = favorite.find(item => item.request === request)?.count;
+    //const number = countFavorite ? countFavorite : 12;
+    const number = useSelector(state => state.number);
     const display = useSelector(state => state.display);
+    console.log(number);
+    
 
 
     useEffect(() => {

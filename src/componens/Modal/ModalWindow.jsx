@@ -15,6 +15,7 @@ import { changeNameInEdit, changeRequest, editElement } from '../../redux/listSl
 import addFavoritesLocal from '../../localStorage/addFavorites';
 import editFavoritesLocal from '../../localStorage/editFavorites';
 import { changeSelect } from '../../redux/listSlice/SelectSlice';
+import { setNewNumber } from '../../redux/listSlice/NewNumberSlice';
 
 
 const ModalWindow = () => {
@@ -23,38 +24,35 @@ const ModalWindow = () => {
     const favorite = useSelector(state => state.favorite);
     const modal = useSelector(state => state.modal);
     const name = useSelector(state => state.name);
-    const number = useSelector(state => state.number);
     const warning = useSelector(state => state.warning);
     const edit = useSelector(state => state.edit);
     const select = useSelector(state => state.select);
-    console.log(select);
+    const newNumber = useSelector(state => state.newNumber);
 
 
     const handleClick = () => {
         if (Object.keys(edit).length !== 0) {
+            //console.log('изменяем');
+            
             if (edit.request.trim() === '') {
                 dispatch(getWarning('Заполните поле "Запрос"'))
             } else {
                 dispatch(editFavorite(edit));
                 editFavoritesLocal(localStorage.getItem('userName'), edit);
                 dispatch(isModalOpen(false));
-                //dispatch(changeName(''));
-                dispatch(changeNumber(12));
-                dispatch(editElement({}))
-                console.log((select));
-                
-                //dispatch(changeSelect('searchSortUnspecified'))
+                dispatch(editElement({}));
+                dispatch(setNewNumber(12));
             }
         } else if (name.trim() === '') {
             dispatch(getWarning('Заполните поле "Название"'))
         } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request) && name !== '') {
-            //console.log(favorite);
-
-            dispatch(addFavorite({ request: request, name: name, id: crypto.randomUUID(), select: select, count: number }));
-            addFavoritesLocal(localStorage.getItem('userName'), { request: request, name: name, id: crypto.randomUUID(), select: select, count: number });
+            //console.log('создаем новое избранное');
+            dispatch(changeNumber(newNumber))
+            dispatch(addFavorite({ request: request, name: name, id: crypto.randomUUID(), select: select, count: newNumber }));
+            addFavoritesLocal(localStorage.getItem('userName'), { request: request, name: name, id: crypto.randomUUID(), select: select, count: newNumber });
             dispatch(isModalOpen(false));
             dispatch(changeName(''));
-            dispatch(changeNumber(12));
+            dispatch(setNewNumber(12));
             dispatch(editElement({}));
             dispatch(changeSelect('searchSortUnspecified'));
         }
@@ -96,5 +94,5 @@ const ModalWindow = () => {
 export default ModalWindow;
 
 //сделать пагинацию
+//вставить видео , а не картинки
 //сортировка норм?
-//переделать количество выводимых видео, когда выводит поиск избранного и потом стираешь количсетво сразу меняется

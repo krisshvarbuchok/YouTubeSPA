@@ -12,6 +12,9 @@ import { isModalOpen } from "../../../redux/listSlice/ModalSlice";
 import ModalWindow from "../../Modal/ModalWindow";
 import isFavoriteHelper from "../../../helper/isFavoriteHelper";
 import { searchRequest } from "../../../redux/listSlice/RequestTotalSlice";
+import { changeNumber } from "../../../redux/listSlice/gridNumberSlice";
+import { initialFavorite } from "../../../redux/listSlice/favoriteSlice";
+import getFavoritesLocal from "../../../localStorage/getFavorites";
 
 const SearchComponent = () => {
     const ref = useRef(null);
@@ -22,35 +25,43 @@ const SearchComponent = () => {
     const warning = useSelector(state => state.warning);
     const modal = useSelector(state => state.modal);
     const select = useSelector(state => state.select);
-    console.log('search', select);
 
-    //const email = useSelector(state => state.email);
-
-
-    useEffect(() => {
+    useEffect(()=>{
         ref.current.focus()
-    }, [])
+        const savedEmail = localStorage.getItem('userName');
+        console.log(localStorage);
+        if(savedEmail){
+            dispatch(initialFavorite(getFavoritesLocal(savedEmail)));
+        }
+    }, [dispatch]);
+
 
     const handleClick = () => {
         console.log('выполнить поиск видео', request);
         if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
-            dispatch(searchRequest(favorite.find(item => item.request === request)?.name))
+            console.log('есть в избранном');
+            dispatch(changeNumber(favorite.find(item => item.request === request)?.count));
+            dispatch(searchRequest(favorite.find(item => item.request === request)?.name) || favorite.find(item => item.request === request)?.request);
+            console.log(favorite.find(item => item.request === request)?.name);
+            
             dispatch(fetchGetVideos({
                 request: favorite.find(item => item.request === request)?.name,
                 select: favorite.find(item => item.request === request)?.select
-            }))
+            }));
         } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) {
-            dispatch(searchRequest(request))
-            dispatch(fetchGetVideos({request, select}))
+            console.log('нет в избранном');
+            dispatch(changeNumber(12));
+            dispatch(searchRequest(request));
+            dispatch(fetchGetVideos({request, select}));
         }
     }
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            handleClick()
+            handleClick();
         }
     }
     const handleChange = (e) => {
-        dispatch(writeRequest(e.target.value))
+        dispatch(writeRequest(e.target.value));
     }
     const handleFavorite = () => {
         if (isFavoriteHelper(favorite, request)) {

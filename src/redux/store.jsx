@@ -11,6 +11,7 @@ import EditElementSlice from './listSlice/EditElementSlice';
 import RequestTotalSlice from './listSlice/RequestTotalSlice';
 import DisplaySlice from './listSlice/DisplaySlice';
 import SelectSlice from './listSlice/SelectSlice';
+import NewNumberSlice from './listSlice/NewNumberSlice';
 
 const store = configureStore({
     reducer: {
@@ -26,6 +27,7 @@ const store = configureStore({
         requestTotal: RequestTotalSlice,
         display: DisplaySlice,
         select: SelectSlice,
+        newNumber: NewNumberSlice,
     }
 })
 
