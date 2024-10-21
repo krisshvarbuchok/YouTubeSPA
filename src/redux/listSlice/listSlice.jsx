@@ -63,7 +63,7 @@ const getVideos = async ({request, select }) => {
  const getMoreInfoAboutVideo = async (videoId) =>{
     const response = await axios.get ('https://www.googleapis.com/youtube/v3/videos', {
         params: {
-            part: 'snippet, statistics',
+            part: 'snippet, statistics, player',
             id: videoId,
             key: import.meta.env.VITE_API_KEY,
         },
@@ -76,7 +76,7 @@ const getVideos = async ({request, select }) => {
  const fetchGetMoreInfoAboutVideo = createAsyncThunk('video/fetchGetMoreInfoAboutVideo', async(videoId) =>{
     const response = await getMoreInfoAboutVideo(videoId);
     //console.log('more',{ videoId, stats: response.data.items[0].statistics });
-    
+        
     return { videoId, stats: response.data.items[0].statistics };
  })
 
@@ -84,7 +84,7 @@ const listSlice = createSlice({
     name: 'list',
     initialState: {
         data: [],
-        stats: {}, 
+        stats: {},
         status: null,
         error: null,
     },

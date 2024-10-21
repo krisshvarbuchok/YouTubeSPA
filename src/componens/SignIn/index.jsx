@@ -17,7 +17,7 @@ const SignIn = () => {
     
 
     const handleClick = () => {
-        navigate('/google')
+        //navigate('/google')
     }
     const onSubmit = (data) => {
 

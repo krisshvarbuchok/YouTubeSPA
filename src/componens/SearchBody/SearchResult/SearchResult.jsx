@@ -7,20 +7,11 @@ import FilterPanel from "../../FilterPanel/FilterPanel";
 const SearchResult = () => {
     const dispatch = useDispatch();
     const { data: { data } } = useSelector(state => state.list);
-    // console.log('data' , totalResults);
-
     const { status, error } = useSelector(state => state.list);
     const { stats } = useSelector(state => state.list);
-    const request = useSelector(state => state.request);
-    //const requestTotal = useSelector(state => state.requestTotal)
-    //console.log('stats' , stats);
-    const favorite = useSelector(state => state.favorite);
-    //const countFavorite = favorite.find(item => item.request === request)?.count;
-    //const number = countFavorite ? countFavorite : 12;
     const number = useSelector(state => state.number);
     const display = useSelector(state => state.display);
-    console.log(number);
-    
+    //console.log(data);
 
 
     useEffect(() => {
@@ -32,7 +23,7 @@ const SearchResult = () => {
     if (status === 'loading') {
         return <div className={styles.error}>...loading</div>
     }
-    if(status === 'failed'){
+    if (status === 'failed') {
         return <div>УПС... что-то пошло не так: {error.message}</div>;
     }
     return (
@@ -43,11 +34,13 @@ const SearchResult = () => {
                 {data.slice(0, number).map(item => {
                     return <li key={item.id.videoId || item.id} className={display === 'grid' ? styles.item : styles.itemFlex}>
                         <div>
-                            <img
+                            <a href={`https://www.youtube.com/watch?v=${item.id.videoId}&t=1s`}> 
+                                <img
                                 src={item.snippet.thumbnails.high.url}
                                 alt={item.snippet.title}
                                 className={display === 'grid' ? styles.img : styles.imgFlex}
                             />
+                            </a>
                         </div>
                         <div >
                             <p className={display === 'grid' ? styles.title : styles.titleFlex}>{item.snippet.title}</p>
