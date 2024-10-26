@@ -1,15 +1,13 @@
 import { ConfigProvider, Input, Button } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import styles from './searchWithoutRequest.module.css';
 import { HeartOutlined } from "@ant-design/icons";
 import { forwardRef } from "react";
 import isFavoriteHelper from "../../../../helper/isFavoriteHelper";
+import useAppSelectors from "../../../../hooks/useAppSelectors";
 
 const SearchWithoutRequest = forwardRef(({ handleChange, handleKeyDown, handleFavorite, handleClick }, ref) => {
-    const dispatch = useDispatch();
-    const request = useSelector(state => state.request);
+    const {request, favorite} = useAppSelectors();
 
-    const favorite = useSelector(state => state.favorite);
 
     return (
         <>
@@ -20,10 +18,10 @@ const SearchWithoutRequest = forwardRef(({ handleChange, handleKeyDown, handleFa
                             fontSize: 20
                         },
                         Button: {
-                            colorPrimary: '#1390E5', // Основной цвет кнопки
-                            colorPrimaryHover: '#0d76c1', // Цвет при наведении
-                            controlHeight: 52, // Высота кнопки
-                            fontSize: 20, // Размер шрифта
+                            colorPrimary: '#1390E5',
+                            colorPrimaryHover: '#0d76c1',
+                            controlHeight: 52,
+                            fontSize: 20,
                         }
                     }
 

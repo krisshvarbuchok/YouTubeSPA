@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { writeRequest } from "../../../redux/listSlice/RequestSlice";
 import { fetchGetVideos } from "../../../redux/listSlice/listSlice";
 import { useEffect, useRef } from "react";
@@ -15,22 +15,18 @@ import { searchRequest } from "../../../redux/listSlice/RequestTotalSlice";
 import { changeNumber } from "../../../redux/listSlice/gridNumberSlice";
 import { initialFavorite } from "../../../redux/listSlice/favoriteSlice";
 import getFavoritesLocal from "../../../localStorage/getFavorites";
+import useAppSelectors from "../../../hooks/useAppSelectors";
 
 const SearchComponent = () => {
     const ref = useRef(null);
     const dispatch = useDispatch();
-    const request = useSelector(state => state.request);
-    const { data } = useSelector(state => state.list);
-    const favorite = useSelector(state => state.favorite);
-    const warning = useSelector(state => state.warning);
-    const modal = useSelector(state => state.modal);
-    const select = useSelector(state => state.select);
+    const { request, data, favorite, warning, modal, select } = useAppSelectors();
 
-    useEffect(()=>{
+    useEffect(() => {
         ref.current.focus()
         const savedEmail = localStorage.getItem('userName');
         console.log(localStorage);
-        if(savedEmail){
+        if (savedEmail) {
             dispatch(initialFavorite(getFavoritesLocal(savedEmail)));
         }
     }, [dispatch]);
@@ -50,7 +46,7 @@ const SearchComponent = () => {
             //console.log('нет в избранном');
             dispatch(changeNumber(12));
             dispatch(searchRequest(request));
-            dispatch(fetchGetVideos({request, select}));
+            dispatch(fetchGetVideos({ request, select }));
         }
     }
     const handleKeyDown = (e) => {

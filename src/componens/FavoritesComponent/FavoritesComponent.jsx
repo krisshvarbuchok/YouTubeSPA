@@ -12,12 +12,11 @@ import { writeRequest } from "../../redux/listSlice/RequestSlice";
 import { searchRequest } from "../../redux/listSlice/RequestTotalSlice";
 import removeFavoritesLocal from "../../localStorage/removeFavorites";
 import { changeNumber } from "../../redux/listSlice/gridNumberSlice";
+import useAppSelectors from "../../hooks/useAppSelectors";
 
 const FavoritesComponent = () => {
-    const favorite = useSelector(state => state.favorite);
     const dispatch = useDispatch();
-    const modal = useSelector(state => state.modal);
-    
+    const { favorite, modal} = useAppSelectors();
 
     const handleSearch = (request, select, count) => {
         dispatch(searchRequest(request));

@@ -5,6 +5,7 @@
     background-color: #FFFFFF;
     border-bottom: 2px solid transparent;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    cursor: pointer;
 }
 .buttonSearch:hover{
     color: #1390E5;

@@ -1,10 +1,12 @@
-import SearchComponent from "./SearchComponent/SearchComponent"
-import SearchResult from "./SearchResult/SearchResult"
-import styles from './searchBody.module.css'
-import { useSelector } from "react-redux"
+import React, { Suspense } from "react";
+import useAppSelectors from "../../hooks/useAppSelectors";
+import SearchComponent from "./SearchComponent/SearchComponent";
+//import SearchResult from "./SearchResult/SearchResult";
+import styles from './searchBody.module.css';
+const SearchResult = React.lazy(() => import('./SearchResult/SearchResult'));
 
 const SearchBody = () => {
-    const { data } = useSelector(state => state.list);
+    const { data } = useAppSelectors();
 
     return (
         <div className="container1">
@@ -13,7 +15,12 @@ const SearchBody = () => {
                 <SearchComponent />
             </div>
 
-            {data.length !== 0 && <SearchResult />}
+            {data.length !== 0 &&
+
+                <Suspense fallback={<div>Загрузка...</div>}>
+                    <SearchResult />
+                </Suspense>
+            }
         </div>
     )
 }

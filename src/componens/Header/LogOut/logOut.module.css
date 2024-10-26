@@ -4,6 +4,7 @@
     font-size: 18px;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     color: #1390E5;
+    cursor: pointer;
 }
 .buttonLogOut:hover{
     color: #19689d;

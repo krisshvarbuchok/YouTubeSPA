@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Input, Modal, } from 'antd';
-import styles from './modalWindow.module.css';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addFavorite, editFavorite } from '../../redux/listSlice/favoriteSlice';
 import { isModalOpen } from '../../redux/listSlice/ModalSlice';
 import SliderComponent from './ModalElements/SliderComponent';
@@ -16,24 +15,19 @@ import addFavoritesLocal from '../../localStorage/addFavorites';
 import editFavoritesLocal from '../../localStorage/editFavorites';
 import { changeSelect } from '../../redux/listSlice/SelectSlice';
 import { setNewNumber } from '../../redux/listSlice/NewNumberSlice';
+import useAppSelectors from '../../hooks/useAppSelectors';
+import isEditComponent from '../../helper/isEditComponent';
 
 
 const ModalWindow = () => {
-    const request = useSelector(state => state.request);
     const dispatch = useDispatch();
-    const favorite = useSelector(state => state.favorite);
-    const modal = useSelector(state => state.modal);
-    const name = useSelector(state => state.name);
-    const warning = useSelector(state => state.warning);
-    const edit = useSelector(state => state.edit);
-    const select = useSelector(state => state.select);
-    const newNumber = useSelector(state => state.newNumber);
+    const { request, favorite, modal, name, warning, edit, select, newNumber } = useAppSelectors();
 
 
     const handleClick = () => {
-        if (Object.keys(edit).length !== 0) {
+        if (!isEditComponent(edit)) {
             //console.log('изменяем');
-            
+
             if (edit.request.trim() === '') {
                 dispatch(getWarning('Заполните поле "Запрос"'))
             } else {
@@ -74,10 +68,10 @@ const ModalWindow = () => {
                 open={modal} onOk={() => handleClick()} okText='Сохранить' onCancel={handleCancel} cancelText='Не сохранять'>
 
                 <div>Запрос
-                    {Object.keys(edit).length === 0 ? <Input value={request} disabled /> : <Input value={edit.request} onChange={(e) => dispatch(changeRequest(e.target.value))} />}
+                    {isEditComponent(edit) ? <Input value={request} disabled /> : <Input value={edit.request} onChange={(e) => dispatch(changeRequest(e.target.value))} />}
                 </div>
                 <div>Название
-                    {Object.keys(edit).length === 0 ?
+                    {isEditComponent(edit) ?
                         <Input placeholder='Укажите название' value={name} onChange={(e) => dispatch(changeName(e.target.value))} /> :
                         <Input placeholder='Укажите название' value={edit.name} onChange={(e) => dispatch(changeNameInEdit(e.target.value))} />
                     }
@@ -94,5 +88,4 @@ const ModalWindow = () => {
 export default ModalWindow;
 
 //сделать пагинацию
-//вставить видео , а не картинки
 //сортировка норм?

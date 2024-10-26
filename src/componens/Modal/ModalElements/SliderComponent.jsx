@@ -1,18 +1,19 @@
 import { Col, InputNumber, Row, Slider } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeNumberInEdit } from '../../../redux/listSlice/EditElementSlice';
 import { setNewNumber } from '../../../redux/listSlice/NewNumberSlice';
+import useAppSelectors from '../../../hooks/useAppSelectors';
+import isEditComponent from '../../../helper/isEditComponent';
 
 
 const SliderComponent = () =>{
     const dispatch = useDispatch();
-    const edit = useSelector(state => state.edit);
-    const newNumber = useSelector(state => state.newNumber);
+    const {edit, newNumber} = useAppSelectors();
     
     
     
     const onChange = (newValue) => {
-        if(Object.keys(edit).length === 0){
+        if(isEditComponent(edit)){
             dispatch(setNewNumber(newValue));
          } else {
             dispatch(changeNumberInEdit(newValue));
@@ -28,7 +29,7 @@ const SliderComponent = () =>{
                                 min={1}
                                 max={50}
                                 onChange={onChange}
-                                value={Object.keys(edit).length === 0 ? newNumber : edit.count}
+                                value={isEditComponent(edit) ? newNumber : edit.count}
                             />
                         </Col>
                         <Col span={4}>
@@ -38,7 +39,7 @@ const SliderComponent = () =>{
                                 style={{
                                     margin: '0 16px',
                                 }}
-                                value={Object.keys(edit).length === 0 ? newNumber : edit.count}
+                                value={isEditComponent(edit) ? newNumber : edit.count}
                                 onChange={onChange}
                             />
                         </Col>

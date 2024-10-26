@@ -3,14 +3,12 @@ import styles from './searchResult.module.css';
 import { fetchGetMoreInfoAboutVideo } from "../../../redux/listSlice/listSlice";
 import { useEffect } from "react";
 import FilterPanel from "../../FilterPanel/FilterPanel";
+import useAppSelectors from "../../../hooks/useAppSelectors";
 
 const SearchResult = () => {
     const dispatch = useDispatch();
     const { data: { data } } = useSelector(state => state.list);
-    const { status, error } = useSelector(state => state.list);
-    const { stats } = useSelector(state => state.list);
-    const number = useSelector(state => state.number);
-    const display = useSelector(state => state.display);
+    const { status, error, stats, number, display } = useAppSelectors();
     //console.log(data);
 
 
@@ -34,12 +32,12 @@ const SearchResult = () => {
                 {data.slice(0, number).map(item => {
                     return <li key={item.id.videoId || item.id} className={display === 'grid' ? styles.item : styles.itemFlex}>
                         <div>
-                            <a href={`https://www.youtube.com/watch?v=${item.id.videoId}&t=1s`}> 
+                            <a href={`https://www.youtube.com/watch?v=${item.id.videoId}&t=1s`}>
                                 <img
-                                src={item.snippet.thumbnails.high.url}
-                                alt={item.snippet.title}
-                                className={display === 'grid' ? styles.img : styles.imgFlex}
-                            />
+                                    src={item.snippet.thumbnails.high.url}
+                                    alt={item.snippet.title}
+                                    className={display === 'grid' ? styles.img : styles.imgFlex}
+                                />
                             </a>
                         </div>
                         <div >
