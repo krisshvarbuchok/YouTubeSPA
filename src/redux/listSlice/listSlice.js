@@ -4,13 +4,13 @@ import axios from "axios";
 
 const config = {
     headers: {
-        Authorization: `Bearer ${import.meta.env.TOKEN}`,
+        Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
         'Content-Type': 'application/json',
         accept: 'application/json',
     }
 }
 const api = axios.create({
-    baseURL: import.meta.env.API_BASE_URL,
+    baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 const authorization = async (obj) => {
@@ -35,7 +35,7 @@ const getVideos = async ({request, select }) => {
         params:{
                 part: 'snippet', // указываем какие данные хотим получить
                 order: select,
-                key: import.meta.env.API_KEY,
+                key: import.meta.env.VITE_API_KEY,
                 q: request,      // запрос поиска
                 type: 'video',
                 maxResults: 50   // максимальное количество видео
@@ -56,7 +56,7 @@ const getVideos = async ({request, select }) => {
         params: {
             part: 'snippet, statistics, player',
             id: videoId,
-            key: import.meta.env.API_KEY,
+            key: import.meta.env.VITE_API_KEY,
         },
     })
     //console.log('response', response);
