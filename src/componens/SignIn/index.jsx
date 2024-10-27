@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import styles from './index.module.css';
 import { Button, ConfigProvider, Input, Flex, Spin } from 'antd';
-import { getWarning } from "../../redux/listSlice/warningSlice";
+import { getWarning } from "../../redux/listSlice/WarningComponentSlice";
 import WarningComponent from "../Warning/WarningComponent";
 
 const contentStyle = {

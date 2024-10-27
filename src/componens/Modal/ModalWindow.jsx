@@ -8,7 +8,7 @@ import SelectComponent from './ModalElements/SelectComponent';
 import isFavoriteHelper from '../../helper/isFavoriteHelper';
 import { changeName } from '../../redux/listSlice/changeNameInModalSlice';
 import { changeNumber } from '../../redux/listSlice/gridNumberSlice';
-import { getWarning } from '../../redux/listSlice/warningSlice';
+import { getWarning } from '../../redux/listSlice/WarningComponentSlice';
 import WarningComponent from '../Warning/WarningComponent';
 import { changeNameInEdit, changeRequest, editElement } from '../../redux/listSlice/EditElementSlice';
 import addFavoritesLocal from '../../localStorage/addFavorites';
