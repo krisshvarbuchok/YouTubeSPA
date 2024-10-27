@@ -3,7 +3,7 @@ import listSlice from "./listSlice/listSlice";
 import RequestSlice from "./listSlice/RequestSlice";
 import isActiveButtonSlice from "./listSlice/isActiveButtonSlice";
 import favoriteSlice from "./listSlice/favoriteSlice";
-import warningSlice from "./listSlice/warningSlice";
+import WarningComponentSlice from "./listSlice/WarningComponentSlice";
 import ModalSlice from "./listSlice/ModalSlice";
 import changeNameInModalSlice from "./listSlice/changeNameInModalSlice";
 import gridNumberSlice from './listSlice/gridNumberSlice';
@@ -19,7 +19,7 @@ const store = configureStore({
         request: RequestSlice,
         isActive: isActiveButtonSlice,
         favorite: favoriteSlice,
-        warning: warningSlice,
+        warning: WarningComponentSlice,
         modal: ModalSlice,
         name: changeNameInModalSlice,
         number: gridNumberSlice,

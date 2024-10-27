@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const WarningSlice = createSlice({
+const WarningComponentSlice = createSlice({
     name: 'warning',
     initialState: '',
     reducers:{
@@ -9,5 +9,5 @@ const WarningSlice = createSlice({
         }
     }
 })
-export const {getWarning} = WarningSlice.actions;
-export default WarningSlice.reducer;
+export const {getWarning} = WarningComponentSlice.actions;
+export default WarningComponentSlice.reducer;
