@@ -7,7 +7,7 @@ import styles from './searchComponent.module.css';
 import { HeartOutlined } from "@ant-design/icons";
 import SearchWithoutRequest from "./SearchWithoutRequest/SearchWithoutRequest";
 import WarningComponent from "../../Warning/WarningComponent";
-import { getWarning } from "../../../redux/listSlice/WarningComponentSlice";
+import { getWarning } from "../../../redux/listSlice/WarningMessageSlice";
 import { isModalOpen } from "../../../redux/listSlice/ModalSlice";
 import ModalWindow from "../../Modal/ModalWindow";
 import isFavoriteHelper from "../../../helper/isFavoriteHelper";
