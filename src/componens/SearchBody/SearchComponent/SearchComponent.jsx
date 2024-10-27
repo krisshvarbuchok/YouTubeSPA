@@ -25,7 +25,7 @@ const SearchComponent = () => {
     useEffect(() => {
         ref.current.focus()
         const savedEmail = localStorage.getItem('userName');
-        console.log(localStorage);
+        //console.log(localStorage);
         if (savedEmail) {
             dispatch(initialFavorite(getFavoritesLocal(savedEmail)));
         }
@@ -33,7 +33,7 @@ const SearchComponent = () => {
 
 
     const handleClick = () => {
-        console.log('выполнить поиск видео', request);
+        //console.log('выполнить поиск видео', request);
         if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
             //console.log('есть в избранном');
             dispatch(changeNumber(favorite.find(item => item.request === request)?.count));

@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Select } from "antd";
 import axios from "axios";
 
 const config = {
@@ -29,7 +28,7 @@ const fetchAuthorization= createAsyncThunk('list/fetchAuthorization' , async(obj
 
 
 const getVideos = async ({request, select }) => {
-     console.log('get', select);
+     //console.log('get', select);
      
      const response = await axios.get ('https://www.googleapis.com/youtube/v3/search', {
         params:{

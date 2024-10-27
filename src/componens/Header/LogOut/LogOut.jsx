@@ -10,7 +10,7 @@ const LogOut = () =>{
     const handleClick = () =>{
         //localStorage.clear()
         localStorage.removeItem('token')
-        console.log(localStorage.getItem('token'));
+        //console.log(localStorage.getItem('token'));
         dispatch(writeRequest(''))
         dispatch(removeList([]))
         navigate('/')
