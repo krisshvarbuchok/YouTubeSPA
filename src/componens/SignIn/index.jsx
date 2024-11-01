@@ -64,7 +64,7 @@ const SignIn = () => {
         <>
             <div className={styles.container}>
                 <div>
-                    <img src="sibdev-logo.svg" alt="Logo" className={styles.logo} />
+                    <img src="/YouTubeSPA/sibdev-logo.svg" alt="Logo" className={styles.logo} />
                 </div>
                 <div className={styles.login}>Вход</div>
                 <form onSubmit={handleSubmit(onSubmit)}  >

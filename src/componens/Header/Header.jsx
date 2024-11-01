@@ -10,7 +10,7 @@ const Header = () => {
             <div className="container1" >
                 <div className={styles.navigation}>
                     <div className={styles.searchAndHeader}>
-                        <img src="sibdev-logo.svg" alt="Logo" className={styles.logo} />
+                        <img src="/YouTubeSPA/sibdev-logo.svg" alt="Logo" className={styles.logo} />
                         <SearchHeader />
                         <FavoritesHeader />
                     </div>
@@ -21,3 +21,4 @@ const Header = () => {
     )
 }
 export default Header;
+//сделать еще раз деплой, но поменять настройки на гитхабе и поменять вите_ в енв если что не так
