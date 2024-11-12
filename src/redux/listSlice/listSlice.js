@@ -14,10 +14,9 @@ const api = axios.create({
 
 const authorization = async (obj) => {
     const response = await api.post('/auth/login', obj, config);
-    //console.log(response);
+
     localStorage.setItem('token', response.data.token);
-    //console.log('захожу', response.data.token);
-    //return response.data;
+ 
 }
 
 const fetchAuthorization= createAsyncThunk('list/fetchAuthorization' , async(obj) =>{
@@ -28,8 +27,7 @@ const fetchAuthorization= createAsyncThunk('list/fetchAuthorization' , async(obj
 
 
 const getVideos = async ({request, select }) => {
-     //console.log('get', select);
-     
+
      const response = await axios.get ('https://www.googleapis.com/youtube/v3/search', {
         params:{
                 part: 'snippet', // указываем какие данные хотим получить
@@ -44,8 +42,6 @@ const getVideos = async ({request, select }) => {
  }
 
  const fetchGetVideos = createAsyncThunk('video/fetchGetVideos', async(request) =>{
-    //console.log('fetch request', request);
-    
     const data = await getVideos(request)
     return data
  })
@@ -57,16 +53,12 @@ const getVideos = async ({request, select }) => {
             id: videoId,
             key: import.meta.env.VITE_API_KEY,
         },
-    })
-    //console.log('response', response);
-    
+    });
     return response
  }
 
  const fetchGetMoreInfoAboutVideo = createAsyncThunk('video/fetchGetMoreInfoAboutVideo', async(videoId) =>{
-    const response = await getMoreInfoAboutVideo(videoId);
-    //console.log('more',{ videoId, stats: response.data.items[0].statistics });
-        
+    const response = await getMoreInfoAboutVideo(videoId);   
     return { videoId, stats: response.data.items[0].statistics };
  })
 
@@ -90,22 +82,9 @@ const listSlice = createSlice({
             })
             .addCase(fetchAuthorization.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                //state.data = action.payload; 
-            })
-            .addCase(fetchAuthorization.rejected, (state, action) => {
-                state.status = 'failed';
-                //state.error = action.payload;
-            })
-            .addCase(fetchGetVideos.pending, (state, action) =>{
-                state.status = 'loading'
             })
             .addCase(fetchGetVideos.fulfilled, (state, action) => {
-                state.status = 'succeeded';
                 state.data = action.payload; 
-            })
-            .addCase(fetchGetVideos.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.payload;
             })
             .addCase(fetchGetMoreInfoAboutVideo.fulfilled, (state, action) => {
                 const { videoId, stats } = action.payload;

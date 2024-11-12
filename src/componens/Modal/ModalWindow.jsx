@@ -30,7 +30,9 @@ const ModalWindow = () => {
 
             if (edit.request.trim() === '') {
                 dispatch(getWarning('Заполните поле "Запрос"'))
-            } else {
+            }else if(edit.name.trim() === ''){
+                dispatch(getWarning('Заполните поле "Название"'))
+            }else {
                 dispatch(editFavorite(edit));
                 editFavoritesLocal(localStorage.getItem('userName'), edit);
                 dispatch(isModalOpen(false));
@@ -87,5 +89,3 @@ const ModalWindow = () => {
 }
 export default ModalWindow;
 
-//сделать пагинацию
-//сортировка норм?

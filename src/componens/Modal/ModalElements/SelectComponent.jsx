@@ -38,7 +38,6 @@ const SelectComponent = () => {
   ];
 
   const onChange = (value) => {
-    //console.log(...value);
     if (isEditComponent(edit)) {
       dispatch(changeSelect(value[0]));;
     } else {

@@ -34,19 +34,25 @@ const SearchComponent = () => {
 
     const handleClick = () => {
         //console.log('выполнить поиск видео', request);
-        if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
-            //console.log('есть в избранном');
-            dispatch(changeNumber(favorite.find(item => item.request === request)?.count));
-            dispatch(searchRequest(favorite.find(item => item.request === request)?.name) || favorite.find(item => item.request === request)?.request);
-            dispatch(fetchGetVideos({
-                request: favorite.find(item => item.request === request)?.name,
-                select: favorite.find(item => item.request === request)?.select
-            }));
-        } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) {
-            //console.log('нет в избранном');
-            dispatch(changeNumber(12));
-            dispatch(searchRequest(request));
-            dispatch(fetchGetVideos({ request, select }));
+        try {
+            if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
+                //console.log('есть в избранном');
+                dispatch(changeNumber(favorite.find(item => item.request === request)?.count));
+                dispatch(searchRequest(favorite.find(item => item.request === request)?.request));
+                dispatch(fetchGetVideos({
+                    request: favorite.find(item => item.request === request)?.request,
+                    select: favorite.find(item => item.request === request)?.select
+                }));
+            } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) {
+                //console.log('нет в избранном');
+                dispatch(changeNumber(12));
+                dispatch(searchRequest(request));
+                dispatch(fetchGetVideos({ request, select }));
+            }
+        }
+        catch(err){
+            console.log(err.message);
+            dispatch(getWarning('Не удалось получить видео'))
         }
     }
     const handleKeyDown = (e) => {
@@ -78,6 +84,7 @@ const SearchComponent = () => {
                 </div>
             }
             {warning === 'Запрос сохранен, если вы хотите изменить или удалить его, перейдите в раздел "Избранное"' && <WarningComponent />}
+            {warning === 'Не удалось получить видео' && <WarningComponent />}
             {modal && <ModalWindow />}
         </>
     )

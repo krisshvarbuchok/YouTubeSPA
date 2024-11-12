@@ -9,8 +9,6 @@ const SearchResult = () => {
     const dispatch = useDispatch();
     const { data: { data } } = useSelector(state => state.list);
     const { status, error, stats, number, display } = useAppSelectors();
-    //console.log(data);
-
 
     useEffect(() => {
         data.forEach(video => {

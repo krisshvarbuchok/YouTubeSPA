@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styles from './favoriteComponent.module.css';
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
@@ -16,13 +16,13 @@ import useAppSelectors from "../../hooks/useAppSelectors";
 
 const FavoritesComponent = () => {
     const dispatch = useDispatch();
-    const { favorite, modal} = useAppSelectors();
+    const { favorite, modal } = useAppSelectors();
 
     const handleSearch = (request, select, count) => {
         dispatch(searchRequest(request));
         dispatch(writeRequest(request));
         dispatch(changeNumber(count))
-        dispatch(fetchGetVideos({request, select}));
+        dispatch(fetchGetVideos({ request, select }));
         dispatch(isActiveButton('search'));
     }
 
@@ -43,10 +43,7 @@ const FavoritesComponent = () => {
                 <ul className={styles.list}>
                     {favorite.map(item => {
                         return <li key={item.id} className={styles.string}>
-                            {item.name.trim() === '' ?
-                                <div className={styles.item} onClick={() => handleSearch(item.request, item.select, item.count)}>{item.request}</div> :
-                                <div className={styles.item} onClick={() => handleSearch(item.name, item.select, item.count)}>{item.name}</div>}
-
+                            <div className={styles.item} onClick={() => handleSearch(item.request, item.select, item.count)}>{item.name}</div>
                             <div className={styles.editAndDelete}>
 
                                 <Button className={styles.edit} onClick={() => handleEdit(item)}><EditOutlined style={{ fontSize: '25px', color: '#39f' }} /></Button>

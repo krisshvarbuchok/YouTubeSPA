@@ -16,28 +16,19 @@ const content = <div style={contentStyle} />;
 
 const SignIn = () => {
     const navigate = useNavigate();
-    const { control, register, handleSubmit, formState: { errors } } = useForm();
-    const { status, error } = useSelector(state => state.list);
+    const { control, handleSubmit, formState: { errors } } = useForm();
+    const { status } = useSelector(state => state.list);
     const dispatch = useDispatch();
     const warning = useSelector(state => state.warning);
 
 
-    // const handleClick = () => {
-    //     //navigate('/google')
-    // }
+
     const onSubmit = (data) => {
-
-        //console.log(data);
-
         dispatch(fetchAuthorization(data))
-            .unwrap()  // Дожидаемся окончания действия
+            .unwrap()  
             .then(() => {
-                //console.log(data);
-
                 localStorage.setItem('userName', data.email)
-                //console.log('втход',localStorage.getItem('userName'));
-
-                navigate('/authenticated');  // Редирект после успешной авторизации
+                navigate('/authenticated'); 
 
             })
             .catch((error) => {
@@ -120,8 +111,6 @@ const SignIn = () => {
                         <Button type="primary" htmlType="submit" className={styles.buttonLogIn}>Вход</Button>
                     </ConfigProvider>
                 </form>
-
-                {/* <Button onClick={handleClick} >Вход через аккаунт Google</Button> */}
             </div>
         </>
     )

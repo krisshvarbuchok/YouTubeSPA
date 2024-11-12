@@ -39,10 +39,9 @@
     height: 100%;
 }
 .title{
-    height: 42px;             /* Высота, исходя из высоты строки */
-    overflow: hidden;         /* Скрываем всё, что не помещается */
-    text-overflow: ellipsis;  /* Добавляем многоточие */
-    display: block;           /* Обычный блочный контейнер */
+    height: 42px;             
+    overflow: hidden;         
+    display: block;
     font-size: 14px;
     font-weight: 500;
     margin: 0;

@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import useAppSelectors from "../../hooks/useAppSelectors";
 import SearchComponent from "./SearchComponent/SearchComponent";
-//import SearchResult from "./SearchResult/SearchResult";
 import styles from './searchBody.module.css';
 const SearchResult = React.lazy(() => import('./SearchResult/SearchResult'));
 
