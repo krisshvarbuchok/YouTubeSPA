@@ -83,6 +83,10 @@ const listSlice = createSlice({
             .addCase(fetchAuthorization.fulfilled, (state, action) => {
                 state.status = 'succeeded';
             })
+            .addCase(fetchAuthorization.rejected, (state, action) => {
+                state.status = 'faild';
+                
+            })
             .addCase(fetchGetVideos.fulfilled, (state, action) => {
                 state.data = action.payload; 
             })

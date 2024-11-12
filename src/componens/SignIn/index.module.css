@@ -26,3 +26,13 @@
     margin: 20px auto;
     width: 176px;
 }
+.loadingBack{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+.loading{
+    background-color: #fafafa;
+}

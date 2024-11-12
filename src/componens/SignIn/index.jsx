@@ -25,21 +25,22 @@ const SignIn = () => {
 
     const onSubmit = (data) => {
         dispatch(fetchAuthorization(data))
-            .unwrap()  
+            .unwrap()
             .then(() => {
                 localStorage.setItem('userName', data.email)
-                navigate('/authenticated'); 
+                navigate('/authenticated');
 
             })
             .catch((error) => {
                 dispatch(getWarning('Ошибка авторизации'));
                 console.error('Ошибка авторизации:', error);
+                
             });
     }
     if (status === 'loading') {
         return <div>
-            <Flex gap="middle" vertical>
-                <Flex gap="middle">
+            <Flex gap="middle" vertical className={styles.loadingBack}>
+                <Flex gap="middle" className={styles.loading}>
                     <Spin tip="Loading" size="large">
                         {content}
                     </Spin>
@@ -47,6 +48,12 @@ const SignIn = () => {
 
             </Flex></div>
     }
+    if (status === 'faild') {
+        return <div>
+             <WarningComponent />
+        </div>
+    }
+
     if (warning === 'Ошибка авторизации') {
         return <WarningComponent />
     }
