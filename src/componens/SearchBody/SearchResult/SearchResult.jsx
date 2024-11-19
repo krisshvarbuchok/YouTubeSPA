@@ -4,11 +4,13 @@ import { fetchGetMoreInfoAboutVideo } from "../../../redux/listSlice/listSlice";
 import { useEffect } from "react";
 import FilterPanel from "../../FilterPanel/FilterPanel";
 import useAppSelectors from "../../../hooks/useAppSelectors";
+import WarningComponent from "../../Warning/WarningComponent";
+
 
 const SearchResult = () => {
     const dispatch = useDispatch();
     const { data: { data } } = useSelector(state => state.list);
-    const { status, error, stats, number, display } = useAppSelectors();
+    const { stats, number, display, status } = useAppSelectors();
 
     useEffect(() => {
         data.forEach(video => {
@@ -16,15 +18,13 @@ const SearchResult = () => {
         });
     }, [data, dispatch]);
 
-    if (status === 'loading') {
-        return <div className={styles.error}>...loading</div>
-    }
-    if (status === 'failed') {
-        return <div>УПС... что-то пошло не так: {error.message}</div>;
-    }
+
+
+
     return (
         <>
             <FilterPanel />
+            {status === 'faild' && <WarningComponent />}
 
             <ul className={display === 'grid' ? styles.grid : styles.flex}>
                 {data.slice(0, number).map(item => {

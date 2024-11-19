@@ -22,9 +22,10 @@ const FavoritesComponent = () => {
         dispatch(searchRequest(request));
         dispatch(writeRequest(request));
         dispatch(changeNumber(count))
-        dispatch(fetchGetVideos({ request, select }));
         dispatch(isActiveButton('search'));
+        dispatch(fetchGetVideos({ request, select }));
     }
+
 
     const handleEdit = (item) => {
         dispatch(editElement(item))

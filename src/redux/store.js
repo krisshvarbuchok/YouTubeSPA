@@ -11,7 +11,6 @@ import RequestTotalSlice from './listSlice/RequestTotalSlice';
 import DisplaySlice from './listSlice/DisplaySlice';
 import SelectSlice from './listSlice/SelectSlice';
 import NewNumberSlice from './listSlice/NewNumberSlice';
-import WarningMessageSlice from "./listSlice/WarningMessageSlice";
 
 const store = configureStore({
     reducer: {
@@ -19,7 +18,6 @@ const store = configureStore({
         request: RequestSlice,
         isActive: isActiveButtonSlice,
         favorite: favoriteSlice,
-        warning: WarningMessageSlice,
         modal: ModalSlice,
         name: changeNameInModalSlice,
         number: gridNumberSlice,

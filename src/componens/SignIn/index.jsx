@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import styles from './index.module.css';
 import { Button, ConfigProvider, Input, Flex, Spin } from 'antd';
-import { getWarning } from "../../redux/listSlice/WarningMessageSlice";
 import WarningComponent from "../Warning/WarningComponent";
 
 const contentStyle = {
@@ -19,23 +18,13 @@ const SignIn = () => {
     const { control, handleSubmit, formState: { errors } } = useForm();
     const { status } = useSelector(state => state.list);
     const dispatch = useDispatch();
-    const warning = useSelector(state => state.warning);
 
 
 
-    const onSubmit = (data) => {
-        dispatch(fetchAuthorization(data))
-            .unwrap()
-            .then(() => {
-                localStorage.setItem('userName', data.email)
-                navigate('/authenticated');
-
-            })
-            .catch((error) => {
-                dispatch(getWarning('Ошибка авторизации'));
-                console.error('Ошибка авторизации:', error);
-                
-            });
+    const onSubmit = async (data) => {
+        await dispatch(fetchAuthorization(data));
+        localStorage.setItem('userName', data.email)
+        navigate('/authenticated');
     }
     if (status === 'loading') {
         return <div>
@@ -45,17 +34,10 @@ const SignIn = () => {
                         {content}
                     </Spin>
                 </Flex>
-
             </Flex></div>
     }
     if (status === 'faild') {
-        return <div>
-             <WarningComponent />
-        </div>
-    }
-
-    if (warning === 'Ошибка авторизации') {
-        return <WarningComponent />
+        return <div><WarningComponent /></div>
     }
 
     return (

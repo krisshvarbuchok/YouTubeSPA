@@ -4,12 +4,8 @@ import FavoritesComponent from "../FavoritesComponent/FavoritesComponent";
 import useAppSelectors from "../../hooks/useAppSelectors";
 
 const MainPage = () => {
-    const {isActive, status} = useAppSelectors();
+    const {isActive} = useAppSelectors();
 
-
-    if (status === 'failed') {
-        return <div>УПС... что-то пошло не так</div>
-    }
 
 
     return (

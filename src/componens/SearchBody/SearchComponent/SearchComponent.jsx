@@ -7,7 +7,6 @@ import styles from './searchComponent.module.css';
 import { HeartOutlined } from "@ant-design/icons";
 import SearchWithoutRequest from "./SearchWithoutRequest/SearchWithoutRequest";
 import WarningComponent from "../../Warning/WarningComponent";
-import { getWarning } from "../../../redux/listSlice/WarningMessageSlice";
 import { isModalOpen } from "../../../redux/listSlice/ModalSlice";
 import ModalWindow from "../../Modal/ModalWindow";
 import isFavoriteHelper from "../../../helper/isFavoriteHelper";
@@ -20,7 +19,10 @@ import useAppSelectors from "../../../hooks/useAppSelectors";
 const SearchComponent = () => {
     const ref = useRef(null);
     const dispatch = useDispatch();
-    const { request, data, favorite, warning, modal, select } = useAppSelectors();
+    const { request, data, favorite, modal, select, status } = useAppSelectors();
+
+
+
 
     useEffect(() => {
         ref.current.focus()
@@ -34,26 +36,22 @@ const SearchComponent = () => {
 
     const handleClick = () => {
         //console.log('выполнить поиск видео', request);
-        try {
-            if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
-                //console.log('есть в избранном');
-                dispatch(changeNumber(favorite.find(item => item.request === request)?.count));
-                dispatch(searchRequest(favorite.find(item => item.request === request)?.request));
-                dispatch(fetchGetVideos({
-                    request: favorite.find(item => item.request === request)?.request,
-                    select: favorite.find(item => item.request === request)?.select
-                }));
-            } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) {
-                //console.log('нет в избранном');
-                dispatch(changeNumber(12));
-                dispatch(searchRequest(request));
-                dispatch(fetchGetVideos({ request, select }));
-            }
+
+        if (request.trim() !== '' && isFavoriteHelper(favorite, request)) {
+            //console.log('есть в избранном');
+            dispatch(changeNumber(favorite.find(item => item.request === request)?.count));
+            dispatch(searchRequest(favorite.find(item => item.request === request)?.request));
+            dispatch(fetchGetVideos({
+                request: favorite.find(item => item.request === request)?.request,
+                select: favorite.find(item => item.request === request)?.select
+            }));
+        } else if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) {
+            //console.log('нет в избранном');
+            dispatch(changeNumber(12));
+            dispatch(searchRequest(request));
+            dispatch(fetchGetVideos({ request, select }));
         }
-        catch(err){
-            console.log(err.message);
-            dispatch(getWarning('Не удалось получить видео'))
-        }
+
     }
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -64,13 +62,8 @@ const SearchComponent = () => {
         dispatch(writeRequest(e.target.value));
     }
     const handleFavorite = () => {
-        if (isFavoriteHelper(favorite, request)) {
-            dispatch(getWarning('Запрос сохранен, если вы хотите изменить или удалить его, перейдите в раздел "Избранное"'))
-        } else if (request.trim() !== '') dispatch(isModalOpen(true));
+        if (request.trim() !== '' && !isFavoriteHelper(favorite, request)) dispatch(isModalOpen(true));
     }
-    useEffect(() => {
-        dispatch(getWarning(''))
-    }, [request])
 
 
     return (
@@ -83,8 +76,7 @@ const SearchComponent = () => {
                     <Button className={styles.button} onClick={() => handleClick()}>Поиск</Button>
                 </div>
             }
-            {warning === 'Запрос сохранен, если вы хотите изменить или удалить его, перейдите в раздел "Избранное"' && <WarningComponent />}
-            {warning === 'Не удалось получить видео' && <WarningComponent />}
+            {status === 'failed' && <WarningComponent />}
             {modal && <ModalWindow />}
         </>
     )

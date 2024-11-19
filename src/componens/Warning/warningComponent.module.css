@@ -1,3 +1,8 @@
 .warning{
     color: rgba(255, 0, 0, 0.415);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: 500;
 }

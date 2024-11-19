@@ -4,11 +4,12 @@ import { HeartOutlined } from "@ant-design/icons";
 import { forwardRef } from "react";
 import isFavoriteHelper from "../../../../helper/isFavoriteHelper";
 import useAppSelectors from "../../../../hooks/useAppSelectors";
+import WarningComponent from "../../../Warning/WarningComponent";
+
 
 const SearchWithoutRequest = forwardRef(({ handleChange, handleKeyDown, handleFavorite, handleClick }, ref) => {
-    const {request, favorite} = useAppSelectors();
-
-
+    const {request, favorite, status} = useAppSelectors();
+   
     return (
         <>
             <ConfigProvider
@@ -35,7 +36,7 @@ const SearchWithoutRequest = forwardRef(({ handleChange, handleKeyDown, handleFa
                     <Button type="primary" className={styles.buttonSearch} onClick={() => handleClick()}>Поиск</Button>
                 </div>
             </ConfigProvider>
-
+                {status === 'faild' && <WarningComponent />}
         </>
     )
 })

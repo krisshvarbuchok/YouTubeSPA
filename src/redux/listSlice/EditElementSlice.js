@@ -7,12 +7,6 @@ const EditElementSlice = createSlice({
         editElement: (state, action) =>{
             return state = action.payload
         },
-        changeRequest: (state, action) => {
-            state.request = action.payload;
-        },
-        changeNameInEdit: (state, action) => {
-            state.name = action.payload;
-        },
         changeNumberInEdit: (state, action) => {
             state.count = action.payload;
         },

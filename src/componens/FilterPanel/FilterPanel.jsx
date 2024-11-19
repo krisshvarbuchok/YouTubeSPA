@@ -5,6 +5,8 @@ import { Button } from 'antd';
 import { changeDisplay } from '../../redux/listSlice/DisplaySlice';
 import useAppSelectors from '../../hooks/useAppSelectors';
 
+const MAX_SEARCH_RESULT = 1_000_000;
+
 const FilterPanel = () => {
     const { requestTotal, totalResults, display } = useAppSelectors();
     const dispatch = useDispatch();
@@ -12,7 +14,7 @@ const FilterPanel = () => {
 
     return (
         <div className={styles.panel}>
-            <p className={styles.subString}>Видео по запросу "{requestTotal}" {totalResults === 1000000 ?
+            <p className={styles.subString}>Видео по запросу "{requestTotal}" {totalResults === MAX_SEARCH_RESULT ?
                 `более ${totalResults}` :
                 totalResults}</p>
             <div className={styles.icon}>
